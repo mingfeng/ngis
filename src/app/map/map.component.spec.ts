@@ -35,7 +35,6 @@ describe('MapComponent', () => {
     const mapElement: HTMLElement = fixture.nativeElement;
     const mapDiv = mapElement.querySelector('div');
     expect(mapDiv.getAttribute('id')).toEqual(component.mapId);
-
   });
 
   it('should call map service initMap after call ngAfterViewInit', () => {

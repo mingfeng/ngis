@@ -2,6 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { MapService } from './map.service';
+import { HeaderComponent } from './header/header.component';
 
 describe('AppComponent', () => {
 
@@ -9,7 +10,8 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        MapComponent
+        MapComponent,
+        HeaderComponent
       ],
       providers: [
         MapService
