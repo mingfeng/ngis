@@ -7,8 +7,13 @@ describe('bootmap App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display app title in app header', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    expect(page.getAppHeaderTitle()).toEqual('BootMap');
+  });
+
+  it('should display an map', () => {
+    page.navigateTo();
+    expect(page.getAppMap()).toBeDefined();
   });
 });
