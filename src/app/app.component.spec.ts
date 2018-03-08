@@ -1,20 +1,22 @@
 import { TestBed, async } from '@angular/core/testing';
+import { Component } from '@angular/core';
+
 import { AppComponent } from './app.component';
-import { MapComponent } from './map/map.component';
-import { MapService } from './map.service';
-import { HeaderComponent } from './header/header.component';
 
 describe('AppComponent', () => {
+
+  @Component({selector: 'app-header', template: ''})
+  class HeaderStubComponent {}
+
+  @Component({selector: 'app-main', template: ''})
+  class MainStubComponent {}
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        MapComponent,
-        HeaderComponent
-      ],
-      providers: [
-        MapService
+        HeaderStubComponent,
+        MainStubComponent
       ]
     }).compileComponents();
   }));
@@ -25,9 +27,15 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it('should render map component', async(() => {
+  it('should render header component', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const appElement: HTMLElement = fixture.nativeElement;
-    expect(appElement.querySelector('app-map')).not.toBeNull();
+    expect(appElement.querySelector('app-header')).not.toBeNull();
+  }));
+
+  it('should render main component', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const appElement: HTMLElement = fixture.nativeElement;
+    expect(appElement.querySelector('app-main')).not.toBeNull();
   }));
 });

@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { MapService } from './map.service';
 import { MapComponent } from './map/map.component';
 import { HeaderComponent } from './header/header.component';
+import { MainComponent } from './main/main.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    HeaderComponent
+    HeaderComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule
