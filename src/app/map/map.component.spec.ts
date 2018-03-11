@@ -33,7 +33,7 @@ describe('MapComponent', () => {
     fixture.detectChanges();
     component = fixture.componentInstance;
     const mapElement: HTMLElement = fixture.nativeElement;
-    const mapDiv = mapElement.querySelector('div');
+    const mapDiv = mapElement.querySelector('.map');
     expect(mapDiv.getAttribute('id')).toEqual(component.mapId);
   });
 
