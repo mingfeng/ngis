@@ -1,4 +1,10 @@
 <div class="main">
-  <app-search-panel></app-search-panel>
-  <app-map></app-map>
+  <split [direction]="horizontal" gutterSize=8>
+    <split-area size="20">
+      <app-search-panel></app-search-panel>
+    </split-area>
+    <split-area size="80">
+      <app-map></app-map>
+    </split-area>
+  </split>
 </div>

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AngularSplitModule } from 'angular-split';
 
 import { AppComponent } from './app.component';
 import { MapService } from './map.service';
@@ -18,7 +19,8 @@ import { SearchPanelComponent } from './search-panel/search-panel.component';
     SearchPanelComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AngularSplitModule
   ],
   providers: [MapService],
   bootstrap: [AppComponent]

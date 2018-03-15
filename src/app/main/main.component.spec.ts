@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
+import { AngularSplitModule } from 'angular-split';
 
 import { MainComponent } from './main.component';
 
@@ -19,7 +20,8 @@ describe('MainComponent', () => {
         MainComponent,
         MapStubComponent,
         SearchPanelStubComponent
-      ]
+      ],
+      imports: [AngularSplitModule]
     })
     .compileComponents();
   }));
