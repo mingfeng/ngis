@@ -7,11 +7,12 @@ import OlSourceOsm from 'ol/source/osm';
 
 @Injectable()
 export class MapService {
-  map: OlMap;
+  private map: OlMap;
+  private _isInitialized = false;
 
   constructor() { }
 
-  initMap(mapId: string) {
+  initialize(mapId: string) {
     this.map = new OlMap({
       target: mapId,
       layers: [
@@ -24,6 +25,10 @@ export class MapService {
         zoom: 4
       })
     });
+    this._isInitialized = true;
   }
 
+  get isInitialized() {
+    return this._isInitialized;
+  }
 }

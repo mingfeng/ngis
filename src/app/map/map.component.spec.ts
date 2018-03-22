@@ -6,7 +6,7 @@ import { MapService } from '../map.service';
 describe('MapComponent', () => {
   let component: MapComponent;
   let fixture: ComponentFixture<MapComponent>;
-  const mapServiceSpy = jasmine.createSpyObj('MapService', ['initMap']);
+  const mapServiceSpy = jasmine.createSpyObj('MapService', ['initialize']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -37,10 +37,10 @@ describe('MapComponent', () => {
     expect(mapDiv.getAttribute('id')).toEqual(component.mapId);
   });
 
-  it('should call map service initMap after call ngAfterViewInit', () => {
+  it('should call map service initialize after call ngAfterViewInit', () => {
     fixture = TestBed.createComponent(MapComponent);
     component = fixture.componentInstance;
     component.ngAfterViewInit();
-    expect(mapServiceSpy.initMap.calls.any()).toBe(true, 'initMap called');
+    expect(mapServiceSpy.initialize.calls.any()).toBe(true, 'initialize called');
   });
 });

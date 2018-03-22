@@ -16,10 +16,11 @@ describe('MapService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should initialize map', inject([MapService], (service: MapService) => {
+  it('should be initialized', inject([MapService], (service: MapService) => {
     const fixture: ComponentFixture<MapComponent> = TestBed.createComponent(MapComponent);
     const component = fixture.componentInstance;
-    service.initMap(component.mapId);
-    expect(service.map).toBeDefined();
+    service.initialize(component.mapId);
+    expect(service.isInitialized).toBeTruthy();
   }));
+
 });
