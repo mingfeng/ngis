@@ -23,4 +23,12 @@ describe('MapService', () => {
     expect(service.isInitialized).toBeTruthy();
   }));
 
+  it('should update map size', inject([MapService], (service: MapService) => {
+    const fixture: ComponentFixture<MapComponent> = TestBed.createComponent(MapComponent);
+    const component = fixture.componentInstance;
+    const mapSpy = jasmine.createSpyObj('OlMap', ['updateSize']);
+    (<any> service).map = mapSpy;
+    service.updateMapSize();
+    expect(mapSpy.updateSize.calls.count()).toBe(1);
+  }));
 });

@@ -28,6 +28,10 @@ export class MapService {
     this._isInitialized = true;
   }
 
+  updateMapSize() {
+    this.map.updateSize();
+  }
+
   get isInitialized() {
     return this._isInitialized;
   }

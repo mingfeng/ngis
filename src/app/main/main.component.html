@@ -1,5 +1,5 @@
 <div class="main">
-  <split [direction]="horizontal" gutterSize=5>
+  <split [direction]="horizontal" gutterSize=5 (dragProgress)="updateMapSize()" (dragEnd)="updateMapSize()">
     <split-area size="20">
       <div class="card text-center h-100 no-border-radius">
         <div class="card-header">
