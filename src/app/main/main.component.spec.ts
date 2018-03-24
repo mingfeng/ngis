@@ -12,6 +12,9 @@ describe('MainComponent', () => {
   @Component({selector: 'app-map', template: ''})
   class MapStubComponent {}
 
+  @Component({selector: 'app-side-panel', template: ''})
+  class SidePanelStubComponent {}
+
   @Component({selector: 'app-search-panel', template: ''})
   class SearchPanelStubComponent {}
 
@@ -21,6 +24,7 @@ describe('MainComponent', () => {
       declarations: [
         MainComponent,
         MapStubComponent,
+        SidePanelStubComponent,
         SearchPanelStubComponent
       ],
       imports: [AngularSplitModule],
@@ -39,16 +43,6 @@ describe('MainComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should render map component', () => {
-    const mapElement: HTMLElement = fixture.nativeElement;
-    expect(mapElement.querySelector('app-map')).not.toBeNull();
-  });
-
-  it('should render search panel component', () => {
-    const mapElement: HTMLElement = fixture.nativeElement;
-    expect(mapElement.querySelector('app-search-panel')).not.toBeNull();
   });
 
   it('should call MapService updateMapSize method', () => {

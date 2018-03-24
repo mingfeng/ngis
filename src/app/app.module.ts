@@ -8,6 +8,7 @@ import { MapComponent } from './map/map.component';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { SearchPanelComponent } from './search-panel/search-panel.component';
+import { SidePanelComponent } from './side-panel/side-panel.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { SearchPanelComponent } from './search-panel/search-panel.component';
     MapComponent,
     HeaderComponent,
     MainComponent,
-    SearchPanelComponent
+    SearchPanelComponent,
+    SidePanelComponent
   ],
   imports: [
     BrowserModule,

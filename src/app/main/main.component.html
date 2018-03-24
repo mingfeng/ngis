@@ -1,26 +1,7 @@
 <div class="main">
   <split [direction]="horizontal" gutterSize=5 (dragProgress)="updateMapSize()" (dragEnd)="updateMapSize()">
     <split-area size="20">
-      <div class="card text-center h-100 no-border-radius">
-        <div class="card-header">
-          <ul class="nav nav-tabs card-header-tabs" role="tablist">
-            <li class="nav-item">
-              <a id="layers-tab" class="nav-link active" data-toggle="tab" href="#layers" role="tab" aria-controls="layers" aria-selected="true">Layers</a>
-            </li>
-            <li class="nav-item">
-              <a id="search-tab" class="nav-link" data-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="false">Search</a>
-            </li>
-          </ul>
-        </div>
-        <div class="tab-content">
-          <div class="tab-pane show active" id="layers" role="tabpanel" aria-labelledby="layers-tab">
-              layers tab
-          </div>
-          <div class="tab-pane" id="search" role="tabpanel" aria-labelledby="search-tab">
-            <app-search-panel></app-search-panel>
-          </div>
-        </div>
-      </div>
+      <app-side-panel></app-side-panel>
     </split-area>
     <split-area size="80">
       <app-map></app-map>
