@@ -10,11 +10,15 @@ describe('SidePanelComponent', () => {
   @Component({selector: 'app-search-panel', template: ''})
   class SearchPanelStubComponent {}
 
+  @Component({selector: 'app-layers-panel', template: ''})
+  class LayersPanelStubComponent {}
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         SidePanelComponent,
-        SearchPanelStubComponent
+        SearchPanelStubComponent,
+        LayersPanelStubComponent
       ]
     })
     .compileComponents();

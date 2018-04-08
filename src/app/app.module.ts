@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { SearchPanelComponent } from './search-panel/search-panel.component';
 import { SidePanelComponent } from './side-panel/side-panel.component';
+import { LayersPanelComponent } from './layers-panel/layers-panel.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SidePanelComponent } from './side-panel/side-panel.component';
     HeaderComponent,
     MainComponent,
     SearchPanelComponent,
-    SidePanelComponent
+    SidePanelComponent,
+    LayersPanelComponent
   ],
   imports: [
     BrowserModule,
