@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('bootmap App', () => {
+describe('ngis App', () => {
   let page: AppPage;
 
   beforeEach(() => {
@@ -9,7 +9,7 @@ describe('bootmap App', () => {
 
   it('should display app title in app header', () => {
     page.navigateTo();
-    expect(page.getAppHeaderTitle()).toEqual('BootMap');
+    expect(page.getAppHeaderTitle()).toEqual('NGIS');
   });
 
   it('should display an map', () => {
