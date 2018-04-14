@@ -1,27 +1,23 @@
 import { Injectable } from '@angular/core';
-import OlMap from 'ol/map';
-import OlView from 'ol/view';
-import OlProj from 'ol/proj';
-import OlTileLayer from 'ol/layer/tile';
-import OlSourceOsm from 'ol/source/osm';
+import * as ol from 'openlayers';
 
 @Injectable()
 export class MapService {
-  private map: OlMap;
+  private map: ol.Map;
   private _isInitialized = false;
 
   constructor() { }
 
   initialize(mapId: string) {
-    this.map = new OlMap({
+    this.map = new ol.Map({
       target: mapId,
       layers: [
-        new OlTileLayer({
-          source: new OlSourceOsm()
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
         })
       ],
-      view: new OlView({
-        center: OlProj.fromLonLat([37.41, 8.82]),
+      view: new ol.View({
+        center: ol.proj.fromLonLat([37.41, 8.82]),
         zoom: 4
       })
     });
