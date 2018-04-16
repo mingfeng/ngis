@@ -10,6 +10,7 @@ import { MainComponent } from './main/main.component';
 import { SearchPanelComponent } from './search-panel/search-panel.component';
 import { SidePanelComponent } from './side-panel/side-panel.component';
 import { LayersPanelComponent } from './layers-panel/layers-panel.component';
+import { LayerService } from './layer.service';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { LayersPanelComponent } from './layers-panel/layers-panel.component';
     BrowserModule,
     AngularSplitModule
   ],
-  providers: [MapService],
+  providers: [MapService, LayerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
