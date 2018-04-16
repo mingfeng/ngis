@@ -1,31 +1,29 @@
 import { Injectable } from '@angular/core';
 import * as ol from 'openlayers';
+import { MapAdapter } from './map-adapter';
+import { Layer, LayerType } from './layer';
 
 @Injectable()
 export class MapService {
-  private map: ol.Map;
+  private mapAdapter: MapAdapter;
   private _isInitialized = false;
 
   constructor() { }
 
   initialize(mapId: string) {
-    this.map = new ol.Map({
-      target: mapId,
-      layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM()
-        })
-      ],
-      view: new ol.View({
-        center: ol.proj.fromLonLat([37.41, 8.82]),
-        zoom: 4
-      })
-    });
+    const layers: Layer[] = [{
+      type: LayerType.TILE,
+      identifier: 'osm',
+      name: 'OpenStreetMap',
+      url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      isBasemap: true
+    }];
+    this.mapAdapter = new MapAdapter(mapId, layers);
     this._isInitialized = true;
   }
 
   updateMapSize() {
-    this.map.updateSize();
+    this.mapAdapter.updateMapSize();
   }
 
   get isInitialized() {

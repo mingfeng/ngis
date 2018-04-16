@@ -1,13 +1,15 @@
 import { TestBed, inject, ComponentFixture } from '@angular/core/testing';
+import { Component } from '@angular/core';
 
 import { MapService } from './map.service';
-import { AppComponent } from './app.component';
-import { MapComponent } from './map/map.component';
 
 describe('MapService', () => {
+  @Component({selector: 'app-map', template: '<div id="testmap">'})
+  class MapStubComponent {}
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MapComponent],
+      declarations: [MapStubComponent],
       providers: [MapService]
     });
   });
@@ -17,18 +19,14 @@ describe('MapService', () => {
   }));
 
   it('should be initialized', inject([MapService], (service: MapService) => {
-    const fixture: ComponentFixture<MapComponent> = TestBed.createComponent(MapComponent);
-    const component = fixture.componentInstance;
-    service.initialize(component.mapId);
+    service.initialize('testmap');
     expect(service.isInitialized).toBeTruthy();
   }));
 
   it('should update map size', inject([MapService], (service: MapService) => {
-    const fixture: ComponentFixture<MapComponent> = TestBed.createComponent(MapComponent);
-    const component = fixture.componentInstance;
-    const mapSpy = jasmine.createSpyObj('OlMap', ['updateSize']);
-    (<any> service).map = mapSpy;
+    const mapAdapterSpy = jasmine.createSpyObj('MapAdapter', ['updateMapSize']);
+    (<any> service).mapAdapter = mapAdapterSpy;
     service.updateMapSize();
-    expect(mapSpy.updateSize.calls.count()).toBe(1);
+    expect(mapAdapterSpy.updateMapSize.calls.count()).toBe(1);
   }));
 });
