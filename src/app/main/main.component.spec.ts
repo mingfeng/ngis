@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { AngularSplitModule } from 'angular-split';
 
 import { MainComponent } from './main.component';
-import { MapService } from '../map.service';
+import { MapService } from '../services/map.service';
 
 describe('MainComponent', () => {
   let component: MainComponent;

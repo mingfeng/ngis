@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { Layer, LayerType } from './layer';
+import { Layer, LayerType } from '../shared/layer';
 
 const LAYERS = [{
   type: LayerType.TILE,

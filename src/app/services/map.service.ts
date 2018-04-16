@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as ol from 'openlayers';
-import { MapAdapter } from './map-adapter';
-import { Layer, LayerType } from './layer';
+
+import { MapAdapter } from '../shared/map-adapter';
+import { Layer, LayerType } from '../shared/layer';
 import { LayerService } from './layer.service';
 
 @Injectable()
