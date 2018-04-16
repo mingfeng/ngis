@@ -1,28 +1,16 @@
 <div class="card-body layers-panel">
   <h6 class="text-muted">Basemaps</h6>
-  <div class="form-check">
+  <div class="form-check" *ngFor="let basemapLayer of basemapLayers">
     <input class="form-check-input" type="radio" name="basemap" id="basemap-1" value="1" checked>
     <label class="form-check-label" for="basemap-1">
-      Basemap 1
+      {{basemapLayer.name}}
     </label>
   </div>
-  <div class="form-check">
-      <input class="form-check-input" type="radio" name="basemap" id="basemap-1" value="1" checked>
-      <label class="form-check-label" for="basemap-1">
-        Basemap 2
-      </label>
-    </div>
   <h6 class="text-muted mt-3">Overlays</h6>
-  <div class="form-check">
+  <div class="form-check" *ngFor="let overlayLayer of overlayerLayers">
     <input class="form-check-input" type="checkbox" name="basemap" id="basemap-1" value="1" checked>
     <label class="form-check-label" for="basemap-1">
-      Layer 1
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" name="basemap" id="basemap-1" value="1" checked>
-    <label class="form-check-label" for="basemap-1">
-      Layer 2
+      {{overlayLayer.name}}
     </label>
   </div>
 </div>
