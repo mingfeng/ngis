@@ -10,6 +10,14 @@ const LAYERS = [{
   name: 'OpenStreetMap',
   url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   isBasemap: true
+}, {
+  type: LayerType.WMS,
+  identifier: 'countries',
+  name: 'Countries',
+  url: 'http://disc1.sci.gsfc.nasa.gov/daac-bin/wms_airsnrt?layer=AIRS_SO2_A&',
+  params: {'LAYERS': 'countries'},
+  projection: 'EPSG:4326',
+  isBasemap: false
 }];
 
 @Injectable()

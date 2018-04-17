@@ -1,6 +1,7 @@
 export enum LayerType {
   OSM,
-  TILE
+  TILE,
+  WMS
 }
 
 export interface Layer {
@@ -8,6 +9,8 @@ export interface Layer {
   identifier: string;
   name: string;
   url: string;
+  params?: {[param: string]: string};
+  projection?: string;
   attributions?: string[];
   isBasemap: boolean;
 }

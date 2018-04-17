@@ -25,6 +25,14 @@ export class MapAdapter {
           attributions: layer.attributions
         })
       });
+    } else if (layer.type === LayerType.WMS) {
+      return new ol.layer.Image({
+        source: new ol.source.ImageWMS({
+          url: layer.url,
+          params: layer.params,
+          projection: layer.projection
+        })
+      });
     }
   }
 
