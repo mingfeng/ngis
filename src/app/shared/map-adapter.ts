@@ -17,7 +17,7 @@ export class MapAdapter {
     });
   }
 
-  createMapLayer(layer: Layer): ol.layer.Base {
+  private createMapLayer(layer: Layer): ol.layer.Base {
     if (layer.type === LayerType.TILE) {
       return new ol.layer.Tile({
         source: new ol.source.XYZ({
