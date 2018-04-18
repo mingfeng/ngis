@@ -1,12 +1,13 @@
 import * as ol from 'openlayers';
 
 import { Layer, LayerType } from './layer';
+import OlLayerFactory from './ollayer-factory';
 
-export class OLMapAdapter {
+export class OlMapAdapter {
   private map: ol.Map;
 
   constructor(target: string, layers: Layer[]) {
-    const mapLayers = layers.map((layer) => this.createMapLayer(layer));
+    const mapLayers = layers.map((layer) => this.createOlLayer(layer));
     this.map = new ol.Map({
       target,
       layers: mapLayers,
@@ -17,23 +18,8 @@ export class OLMapAdapter {
     });
   }
 
-  private createMapLayer(layer: Layer): ol.layer.Base {
-    if (layer.type === LayerType.TILE) {
-      return new ol.layer.Tile({
-        source: new ol.source.XYZ({
-          url: layer.url,
-          attributions: layer.attributions
-        })
-      });
-    } else if (layer.type === LayerType.WMS) {
-      return new ol.layer.Image({
-        source: new ol.source.ImageWMS({
-          url: layer.url,
-          params: layer.params,
-          projection: layer.projection
-        })
-      });
-    }
+  private createOlLayer(layer: Layer): ol.layer.Base {
+    return OlLayerFactory.getOlLayer(layer);
   }
 
   updateMapSize() {

@@ -1,5 +1,4 @@
 export enum LayerType {
-  OSM,
   TILE,
   WMS
 }
