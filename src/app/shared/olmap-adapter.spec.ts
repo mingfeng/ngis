@@ -1,6 +1,6 @@
 import * as ol from 'openlayers';
 
-import { OLMapAdapter } from './map-adapter';
+import { OLMapAdapter } from './olmap-adapter';
 
 describe('OLMapAdapter', () => {
   it('should be created', () => {
