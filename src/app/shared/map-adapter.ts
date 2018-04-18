@@ -2,7 +2,7 @@ import * as ol from 'openlayers';
 
 import { Layer, LayerType } from './layer';
 
-export class MapAdapter {
+export class OLMapAdapter {
   private map: ol.Map;
 
   constructor(target: string, layers: Layer[]) {
