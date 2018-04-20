@@ -1,20 +1,45 @@
 import * as ol from 'openlayers';
 
 import { OlMapAdapter } from './olmap-adapter';
+import { LAYERS } from './mock';
+import OlLayerFactory from './ollayer-factory';
 
 describe('OLMapAdapter', () => {
-  it('should be created', () => {
-    const mapSpy = spyOn(ol, 'Map');
-    const mapAdapter  = new OlMapAdapter('map', []);
-    expect(mapSpy.calls.count()).toBe(1);
+  let mapContractorSpy: jasmine.Spy;
+  let mapObjectSpy: jasmine.SpyObj<ol.Map>;
+  let mapAdapter: OlMapAdapter;
+
+  beforeEach(() => {
+    mapContractorSpy = spyOn(ol, 'Map');
+    mapObjectSpy = jasmine.createSpyObj('Map', ['updateSize']);
+    mapContractorSpy.and.returnValue(mapObjectSpy);
+    mapAdapter  = new OlMapAdapter('map', LAYERS);
   });
 
-  it('should update map size', () => {
-    const mapSpy = spyOn(ol, 'Map');
-    const mapObjectSpy = jasmine.createSpyObj('Map', ['updateSize']);
-    const mapAdapter = new OlMapAdapter('map', []);
-    (<any>mapAdapter).map = mapObjectSpy;
+  it('should be created', () => {
+    expect(mapContractorSpy.calls.count()).toBe(1);
+  });
+
+  it('#updateSize should call a spy method', () => {
     mapAdapter.updateMapSize();
     expect(mapObjectSpy.updateSize.calls.count()).toBe(1);
+  });
+
+  it('#setBasemap should set given basemap visible and other basemaps invisible', () => {
+    const basemaps = (<any>mapAdapter).basemaps;
+    basemaps['osm'].setVisible(true);
+    basemaps['wkm'].setVisible(false);
+    mapAdapter.setBasemap('wkm');
+    expect(basemaps['osm'].getVisible()).toBe(false);
+    expect(basemaps['wkm'].getVisible()).toBe(true);
+  });
+
+  it('#setOverlayVisibility should set given overlay\'s visibility', () => {
+    const overlays = (<any>mapAdapter).overlays;
+    overlays['countries'].setVisible(true);
+    mapAdapter.setOverlayVisibility('countries', false);
+    expect(overlays['countries'].getVisible()).toBe(false);
+    mapAdapter.setOverlayVisibility('countries', true);
+    expect(overlays['countries'].getVisible()).toBe(true);
   });
 });
