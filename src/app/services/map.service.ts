@@ -12,6 +12,10 @@ export class MapService {
 
   constructor(private layerService: LayerService) { }
 
+  get isInitialized() {
+    return this._isInitialized;
+  }
+
   initialize(mapId: string) {
     this.layerService.getLayers().subscribe((layers) => {
       this.mapAdapter = new OlMapAdapter(mapId, layers);
@@ -23,7 +27,11 @@ export class MapService {
     this.mapAdapter.updateMapSize();
   }
 
-  get isInitialized() {
-    return this._isInitialized;
+  setBasemap(identifier: string) {
+    this.mapAdapter.setBasemap(identifier);
+  }
+
+  setOverlayVisibility(identifier: string, isVisible: boolean) {
+    this.mapAdapter.setOverlayVisibility(identifier, isVisible);
   }
 }

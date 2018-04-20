@@ -1,14 +1,25 @@
 <div class="card-body layers-panel">
   <h6 class="text-muted">Basemaps</h6>
   <div class="form-check" *ngFor="let basemapLayer of basemapLayers">
-    <input class="form-check-input" type="radio" name="basemap" id="basemap-1" value="1" checked>
+    <input
+      type="radio"
+      class="form-check-input"
+      name="basemap"
+      [checked]="basemapLayer.identifier === currentBasemap"
+      (change)="changeBasemap(basemapLayer.identifier)"
+    >
     <label class="form-check-label" for="basemap-1">
       {{basemapLayer.name}}
     </label>
   </div>
   <h6 class="text-muted mt-3">Overlays</h6>
   <div class="form-check" *ngFor="let overlayLayer of overlayLayers">
-    <input class="form-check-input" type="checkbox" name="basemap" id="basemap-1" value="1" checked>
+    <input
+      type="checkbox"
+      class="form-check-input"
+      [checked]="currentOverlays.has(overlayLayer.identifier)"
+      (change)="toggleOverlay(overlayLayer.identifier)"
+    >
     <label class="form-check-label" for="basemap-1">
       {{overlayLayer.name}}
     </label>

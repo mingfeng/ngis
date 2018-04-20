@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 
 import { MapService } from './map.service';
 import { LayerService } from './layer.service';
+import { OlMapAdapter } from '../shared/olmap-adapter';
 
 describe('MapService', () => {
   @Component({selector: 'app-map', template: '<div id="testmap">'})
@@ -15,19 +16,35 @@ describe('MapService', () => {
     });
   });
 
+  let mapAdapterSpy: jasmine.SpyObj<OlMapAdapter>;
+  beforeEach(() => {
+    mapAdapterSpy = jasmine.createSpyObj('OlMapAdapter', ['updateMapSize', 'setBasemap', 'setOverlayVisibility']);
+  });
+
   it('should be created', inject([MapService], (service: MapService) => {
     expect(service).toBeTruthy();
   }));
 
-  it('should be initialized', inject([MapService], (service: MapService) => {
+  it('#initialize should set isInitialied to true', inject([MapService], (service: MapService) => {
     service.initialize('testmap');
     expect(service.isInitialized).toBeTruthy();
   }));
 
-  it('should update map size', inject([MapService], (service: MapService) => {
-    const mapAdapterSpy = jasmine.createSpyObj('MapAdapter', ['updateMapSize']);
+  it('#updateMapSize should call spy updateMapSize', inject([MapService], (service: MapService) => {
     (<any> service).mapAdapter = mapAdapterSpy;
     service.updateMapSize();
-    expect(mapAdapterSpy.updateMapSize.calls.count()).toBe(1);
+    expect(mapAdapterSpy.updateMapSize).toHaveBeenCalledTimes(1);
+  }));
+
+  it('#setBasemap should call spy setBasemap', inject([MapService], (service: MapService) => {
+    (<any> service).mapAdapter = mapAdapterSpy;
+    service.setBasemap('basemap');
+    expect(mapAdapterSpy.setBasemap).toHaveBeenCalledWith('basemap');
+  }));
+
+  it('#setOverlayVisibility should call spy setOverlayVisibility', inject([MapService], (service: MapService) => {
+    (<any> service).mapAdapter = mapAdapterSpy;
+    service.setOverlayVisibility('overlay', true);
+    expect(mapAdapterSpy.setOverlayVisibility).toHaveBeenCalledWith('overlay', true);
   }));
 });

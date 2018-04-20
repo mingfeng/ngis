@@ -11,6 +11,12 @@ const LAYERS = [{
   url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   isBasemap: true
 }, {
+  type: LayerType.TILE,
+  identifier: 'wkm',
+  name: 'Wikimedia Maps',
+  url: 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png',
+  isBasemap: true
+}, {
   type: LayerType.WMS,
   identifier: 'countries',
   name: 'Countries',
