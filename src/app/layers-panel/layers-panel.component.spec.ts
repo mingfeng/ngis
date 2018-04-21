@@ -4,13 +4,16 @@ import { of } from 'rxjs/observable/of';
 import { LayersPanelComponent } from './layers-panel.component';
 import { LayerService } from '../services/layer.service';
 import { MapService } from '../services/map.service';
+import { MapConfigService } from '../services/map-config.service';
 import { Layer, LayerType } from '../shared/layer';
+import { MAP_CONFIG } from '../shared/mock';
 
 describe('LayersPanelComponent', () => {
   let component: LayersPanelComponent;
   let fixture: ComponentFixture<LayersPanelComponent>;
   let layerServiceSpy: jasmine.SpyObj<LayerService>;
   let mapServiceSpy: jasmine.SpyObj<MapService>;
+  let mapConfigServiceSpy: jasmine.SpyObj<MapConfigService>;
 
   const mockLayers: Layer[] = [{
     type: LayerType.TILE,
@@ -35,12 +38,15 @@ describe('LayersPanelComponent', () => {
     layerServiceSpy = jasmine.createSpyObj('LayerService', ['getLayers']);
     layerServiceSpy.getLayers.and.returnValue(of(mockLayers));
     mapServiceSpy = jasmine.createSpyObj('MapService', ['setBasemap', 'setOverlayVisibility']);
+    mapConfigServiceSpy = jasmine.createSpyObj('MapConfigService', ['getMapConfig']);
+    mapConfigServiceSpy.getMapConfig.and.returnValue(of(MAP_CONFIG));
 
     TestBed.configureTestingModule({
       declarations: [ LayersPanelComponent ],
       providers: [
         { provide: LayerService, useValue: layerServiceSpy },
-        { provide: MapService, useValue: mapServiceSpy }
+        { provide: MapService, useValue: mapServiceSpy },
+        { provide: MapConfigService, useValue: mapConfigServiceSpy }
       ]
     })
     .compileComponents();
@@ -54,8 +60,8 @@ describe('LayersPanelComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    expect(component.currentBasemap).toEqual('basemap-1');
-    expect(component.currentOverlays).toEqual(new Set<string>());
+    expect(component.currentBasemap).toEqual('osm');
+    expect(component.currentOverlays).toEqual(new Set(['countries']));
   });
 
   it('#changeBasemap should update currentBasemap and call a map service spy method', () => {

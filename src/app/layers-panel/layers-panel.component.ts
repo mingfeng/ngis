@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { LayerService } from '../services/layer.service';
 import { MapService } from '../services/map.service';
 import { Layer } from '../shared/layer';
+import { MapConfigService } from '../services/map-config.service';
 
 @Component({
   selector: 'app-layers-panel',
@@ -12,10 +13,14 @@ import { Layer } from '../shared/layer';
 export class LayersPanelComponent implements OnInit {
   basemapLayers: Layer[] = [];
   overlayLayers: Layer[] = [];
-  currentBasemap = '';
-  currentOverlays: Set<string> = new Set();
+  currentBasemap: string;
+  currentOverlays: Set<string>;
 
-  constructor(private mapService: MapService, private layerService: LayerService) { }
+  constructor(
+    private mapService: MapService,
+    private layerService: LayerService,
+    private mapConfigService: MapConfigService
+  ) { }
 
   ngOnInit() {
     this.getLayers();
@@ -30,7 +35,10 @@ export class LayersPanelComponent implements OnInit {
           this.overlayLayers.push(layer);
         }
       });
-      this.currentBasemap = this.basemapLayers[0].identifier;  // must have at least one basemap
+      this.mapConfigService.getMapConfig().subscribe(mapConfig => {
+        this.currentBasemap = mapConfig.defaultBasemap;
+        this.currentOverlays = new Set(mapConfig.defaultOverlays);
+      });
     });
   }
 
