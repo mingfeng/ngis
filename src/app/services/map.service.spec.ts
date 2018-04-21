@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { MapService } from './map.service';
 import { LayerService } from './layer.service';
 import { OlMapAdapter } from '../shared/olmap-adapter';
+import { MapConfigService } from './map-config.service';
 
 describe('MapService', () => {
   @Component({selector: 'app-map', template: '<div id="testmap">'})
@@ -12,7 +13,7 @@ describe('MapService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [MapStubComponent],
-      providers: [MapService, LayerService]
+      providers: [MapService, LayerService, MapConfigService]
     });
   });
 

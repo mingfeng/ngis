@@ -14,6 +14,7 @@ export default class OlLayerFactory {
 
   private static getTileLayer(layer: Layer): ol.layer.Tile {
     return new ol.layer.Tile({
+      visible: false,
       source: new ol.source.XYZ({
         url: layer.url,
         attributions: layer.attributions
@@ -23,6 +24,7 @@ export default class OlLayerFactory {
 
   private static getWMSLayer(layer: Layer): ol.layer.Image {
     return new ol.layer.Image({
+      visible: false,
       source: new ol.source.ImageWMS({
         url: layer.url,
         params: layer.params,

@@ -1,6 +1,7 @@
 import * as ol from 'openlayers';
 
 import { Layer, LayerType } from './layer';
+import { MapConfig } from './map-config';
 import OlLayerFactory from './ollayer-factory';
 
 export class OlMapAdapter {
@@ -8,7 +9,7 @@ export class OlMapAdapter {
   private basemaps: {[identifier: string]: ol.layer.Base};
   private overlays: {[identifier: string]: ol.layer.Base};
 
-  constructor(target: string, layers: Layer[]) {
+  constructor(target: string, layers: Layer[], mapConfig: MapConfig) {
     this.basemaps = layers.filter(layer => layer.isBasemap).reduce((basemaps, layer) => {
       basemaps[layer.identifier] = OlLayerFactory.getOlLayer(layer);
       return basemaps;
@@ -18,12 +19,15 @@ export class OlMapAdapter {
       return overlays;
     }, {});
 
+    this.basemaps[mapConfig.activeBasemap].setVisible(true);
+    mapConfig.activeOverlays.forEach(identifier => this.overlays[identifier].setVisible(true));
+
     this.map = new ol.Map({
       target,
       layers: Object.values(this.basemaps).concat(Object.values(this.overlays)),
       view: new ol.View({
-        center: ol.proj.fromLonLat([0, 0]),
-        zoom: 4
+        center: ol.proj.fromLonLat(mapConfig.center),
+        zoom: mapConfig.zoom
       })
     });
   }

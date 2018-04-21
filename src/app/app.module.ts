@@ -11,6 +11,7 @@ import { SearchPanelComponent } from './search-panel/search-panel.component';
 import { SidePanelComponent } from './side-panel/side-panel.component';
 import { LayersPanelComponent } from './layers-panel/layers-panel.component';
 import { LayerService } from './services/layer.service';
+import { MapConfigService } from './services/map-config.service';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { LayerService } from './services/layer.service';
     BrowserModule,
     AngularSplitModule
   ],
-  providers: [MapService, LayerService],
+  providers: [MapService, LayerService, MapConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

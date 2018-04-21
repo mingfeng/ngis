@@ -1,6 +1,7 @@
-import { LayerType } from './layer';
+import { Layer, LayerType } from './layer';
+import { MapConfig } from './map-config';
 
-export const LAYERS = [{
+export const LAYERS: Layer[] = [{
   type: LayerType.TILE,
   identifier: 'osm',
   name: 'OpenStreetMap',
@@ -21,3 +22,10 @@ export const LAYERS = [{
   projection: 'EPSG:4326',
   isBasemap: false
 }];
+
+export const MAP_CONFIG: MapConfig = {
+  activeBasemap: 'osm',
+  activeOverlays: ['countries'],
+  center: [24.9384, 60.1699],
+  zoom: 12
+};

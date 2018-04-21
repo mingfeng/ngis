@@ -1,7 +1,7 @@
 import * as ol from 'openlayers';
 
 import { OlMapAdapter } from './olmap-adapter';
-import { LAYERS } from './mock';
+import { LAYERS, MAP_CONFIG } from './mock';
 import OlLayerFactory from './ollayer-factory';
 
 describe('OLMapAdapter', () => {
@@ -13,7 +13,7 @@ describe('OLMapAdapter', () => {
     mapContractorSpy = spyOn(ol, 'Map');
     mapObjectSpy = jasmine.createSpyObj('Map', ['updateSize']);
     mapContractorSpy.and.returnValue(mapObjectSpy);
-    mapAdapter  = new OlMapAdapter('map', LAYERS);
+    mapAdapter  = new OlMapAdapter('map', LAYERS, MAP_CONFIG);
   });
 
   it('should be created', () => {
