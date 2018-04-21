@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
 import { Layer, LayerType } from '../shared/layer';
-import { LAYERS } from '../shared/mock';
+import { LAYERS } from '../shared/mocks';
 
 @Injectable()
 export class LayerService {

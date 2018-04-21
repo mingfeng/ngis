@@ -1,7 +1,7 @@
 import * as ol from 'openlayers';
 
 import { OlMapAdapter } from './olmap-adapter';
-import { LAYERS, MAP_CONFIG } from './mock';
+import { LAYERS, MAP_CONFIG } from './mocks';
 import OlLayerFactory from './ollayer-factory';
 
 describe('OLMapAdapter', () => {

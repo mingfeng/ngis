@@ -6,7 +6,7 @@ import { LayerService } from '../services/layer.service';
 import { MapService } from '../services/map.service';
 import { MapConfigService } from '../services/map-config.service';
 import { Layer, LayerType } from '../shared/layer';
-import { LAYERS, MAP_CONFIG } from '../shared/mock';
+import { LAYERS, MAP_CONFIG } from '../shared/mocks';
 
 describe('LayersPanelComponent', () => {
   let component: LayersPanelComponent;
