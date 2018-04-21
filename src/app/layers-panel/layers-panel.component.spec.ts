@@ -6,7 +6,7 @@ import { LayerService } from '../services/layer.service';
 import { MapService } from '../services/map.service';
 import { MapConfigService } from '../services/map-config.service';
 import { Layer, LayerType } from '../shared/layer';
-import { MAP_CONFIG } from '../shared/mock';
+import { LAYERS, MAP_CONFIG } from '../shared/mock';
 
 describe('LayersPanelComponent', () => {
   let component: LayersPanelComponent;
@@ -15,28 +15,9 @@ describe('LayersPanelComponent', () => {
   let mapServiceSpy: jasmine.SpyObj<MapService>;
   let mapConfigServiceSpy: jasmine.SpyObj<MapConfigService>;
 
-  const mockLayers: Layer[] = [{
-    type: LayerType.TILE,
-    identifier: 'basemap-1',
-    name: 'Basemap 1',
-    url: '/basemap-1/',
-    isBasemap: true
-  }, {
-    type: LayerType.TILE,
-    identifier: 'basemap-2',
-    name: 'Basemap 2',
-    url: '/basemap-2/',
-    isBasemap: true
-  }, {
-    type: LayerType.WMS,
-    identifier: 'overlay-1',
-    name: 'Overlayre 1',
-    url: '/overlay-1/',
-    isBasemap: false
-  }];
   beforeEach(async(() => {
     layerServiceSpy = jasmine.createSpyObj('LayerService', ['getLayers']);
-    layerServiceSpy.getLayers.and.returnValue(of(mockLayers));
+    layerServiceSpy.getLayers.and.returnValue(of(LAYERS));
     mapServiceSpy = jasmine.createSpyObj('MapService', ['setBasemap', 'setOverlayVisibility']);
     mapConfigServiceSpy = jasmine.createSpyObj('MapConfigService', ['getMapConfig']);
     mapConfigServiceSpy.getMapConfig.and.returnValue(of(MAP_CONFIG));
