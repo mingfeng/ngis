@@ -24,8 +24,8 @@ export const LAYERS: Layer[] = [{
 }];
 
 export const MAP_CONFIG: MapConfig = {
-  activeBasemap: 'osm',
-  activeOverlays: ['countries'],
+  defaultBasemap: 'osm',
+  defaultOverlays: ['countries'],
   center: [24.9384, 60.1699],
   zoom: 12
 };

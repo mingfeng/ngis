@@ -1,6 +1,6 @@
 export interface MapConfig {
-  activeBasemap: string;
-  activeOverlays: string[];
+  defaultBasemap: string;
+  defaultOverlays: string[];
   center: [number, number];
   zoom: number;
 }

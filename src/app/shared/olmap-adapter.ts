@@ -19,8 +19,8 @@ export class OlMapAdapter {
       return overlays;
     }, {});
 
-    this.basemaps[mapConfig.activeBasemap].setVisible(true);
-    mapConfig.activeOverlays.forEach(identifier => this.overlays[identifier].setVisible(true));
+    this.basemaps[mapConfig.defaultBasemap].setVisible(true);
+    mapConfig.defaultOverlays.forEach(identifier => this.overlays[identifier].setVisible(true));
 
     this.map = new ol.Map({
       target,
