@@ -5,10 +5,11 @@
       type="radio"
       class="form-check-input"
       name="basemap"
+      [id]="basemapLayer.identifier"
       [checked]="basemapLayer.identifier === currentBasemap"
       (change)="changeBasemap(basemapLayer.identifier)"
     >
-    <label class="form-check-label" for="basemap-1">
+    <label class="form-check-label" [for]="basemapLayer.identifier">
       {{basemapLayer.name}}
     </label>
   </div>
@@ -17,10 +18,11 @@
     <input
       type="checkbox"
       class="form-check-input"
+      [id]="overlayLayer.identifier"
       [checked]="currentOverlays.has(overlayLayer.identifier)"
       (change)="toggleOverlay(overlayLayer.identifier)"
     >
-    <label class="form-check-label" for="basemap-1">
+    <label class="form-check-label" [for]="overlayLayer.identifier">
       {{overlayLayer.name}}
     </label>
   </div>
