@@ -1,6 +1,6 @@
 export enum LayerType {
   TILE,
-  WMS
+  VECTOR
 }
 
 export interface Layer {

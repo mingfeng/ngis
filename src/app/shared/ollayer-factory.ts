@@ -7,8 +7,8 @@ export default class OlLayerFactory {
     switch (layer.type) {
       case LayerType.TILE:
         return OlLayerFactory.getTileLayer(layer);
-      case LayerType.WMS:
-        return OlLayerFactory.getWMSLayer(layer);
+      case LayerType.VECTOR:
+        return OlLayerFactory.getVectorLayer(layer);
     }
   }
 
@@ -22,13 +22,12 @@ export default class OlLayerFactory {
     });
   }
 
-  private static getWMSLayer(layer: Layer): ol.layer.Image {
-    return new ol.layer.Image({
+  private static getVectorLayer(layer: Layer): ol.layer.Image {
+    return new ol.layer.Vector({
       visible: false,
-      source: new ol.source.ImageWMS({
+      source: new ol.source.Vector({
         url: layer.url,
-        params: layer.params,
-        projection: layer.projection
+        format:  new ol.format.GeoJSON()
       })
     });
   }
