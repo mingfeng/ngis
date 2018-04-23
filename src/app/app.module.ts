@@ -12,6 +12,7 @@ import { SidePanelComponent } from './side-panel/side-panel.component';
 import { LayersPanelComponent } from './layers-panel/layers-panel.component';
 import { LayerService } from './services/layer.service';
 import { MapConfigService } from './services/map-config.service';
+import { MapToolbarComponent } from './map-toolbar/map-toolbar.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { MapConfigService } from './services/map-config.service';
     MainComponent,
     SearchPanelComponent,
     SidePanelComponent,
-    LayersPanelComponent
+    LayersPanelComponent,
+    MapToolbarComponent
   ],
   imports: [
     BrowserModule,
