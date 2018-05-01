@@ -100,8 +100,8 @@ export class OlMapAdapter {
   }
 
   activateModify() {
-    this.draw.setActive(false);
     this.select.setActive(true);
     this.modify.setActive(true);
+    this.draw.setActive(false);
   }
 }

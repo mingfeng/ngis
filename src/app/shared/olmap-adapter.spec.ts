@@ -42,4 +42,37 @@ describe('OLMapAdapter', () => {
     mapAdapter.setOverlayVisibility('countries', true);
     expect(overlays['countries'].getVisible()).toBe(true);
   });
+
+  it('#resetInteraction should deactivate all interactions', () => {
+    const featureCollection = (<any>mapAdapter).select.getFeatures();
+    const clearSpy = spyOn(featureCollection, 'clear');
+    const selectSetActiveSpy = spyOn((<any>mapAdapter).select, 'setActive');
+    const modifySetActiveSpy = spyOn((<any>mapAdapter).modify, 'setActive');
+    const drawSetActiveSpy = spyOn((<any>mapAdapter).draw, 'setActive');
+    mapAdapter.resetInteraction();
+    expect(clearSpy).toHaveBeenCalled();
+    expect(selectSetActiveSpy).toHaveBeenCalledWith(false);
+    expect(modifySetActiveSpy).toHaveBeenCalledWith(false);
+    expect(drawSetActiveSpy).toHaveBeenCalledWith(false);
+  });
+
+  it('#activateDraw should deactive select and modify and activate draw', () => {
+    const selectSetActiveSpy = spyOn((<any>mapAdapter).select, 'setActive');
+    const modifySetActiveSpy = spyOn((<any>mapAdapter).modify, 'setActive');
+    const drawSetActiveSpy = spyOn((<any>mapAdapter).draw, 'setActive');
+    mapAdapter.activateDraw();
+    expect(selectSetActiveSpy).toHaveBeenCalledWith(false);
+    expect(modifySetActiveSpy).toHaveBeenCalledWith(false);
+    expect(drawSetActiveSpy).toHaveBeenCalledWith(true);
+  });
+
+  it('#activateModify should deactivate draw and activate select and modify', () => {
+    const selectSetActiveSpy = spyOn((<any>mapAdapter).select, 'setActive');
+    const modifySetActiveSpy = spyOn((<any>mapAdapter).modify, 'setActive');
+    const drawSetActiveSpy = spyOn((<any>mapAdapter).draw, 'setActive');
+    mapAdapter.activateModify();
+    expect(selectSetActiveSpy).toHaveBeenCalledWith(true);
+    expect(modifySetActiveSpy).toHaveBeenCalledWith(true);
+    expect(drawSetActiveSpy).toHaveBeenCalledWith(false);
+  });
 });
