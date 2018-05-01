@@ -19,7 +19,14 @@ describe('MapService', () => {
 
   let mapAdapterSpy: jasmine.SpyObj<OlMapAdapter>;
   beforeEach(() => {
-    mapAdapterSpy = jasmine.createSpyObj('OlMapAdapter', ['updateMapSize', 'setBasemap', 'setOverlayVisibility']);
+    mapAdapterSpy = jasmine.createSpyObj('OlMapAdapter', [
+      'updateMapSize',
+      'setBasemap',
+      'setOverlayVisibility',
+      'resetInteraction',
+      'activateDraw',
+      'activateModify'
+    ]);
   });
 
   it('should be created', inject([MapService], (service: MapService) => {
@@ -47,5 +54,23 @@ describe('MapService', () => {
     (<any> service).mapAdapter = mapAdapterSpy;
     service.setOverlayVisibility('overlay', true);
     expect(mapAdapterSpy.setOverlayVisibility).toHaveBeenCalledWith('overlay', true);
+  }));
+
+  it('#resetInteraction should call spy resetInteraction', inject([MapService], (service: MapService) => {
+    (<any> service).mapAdapter = mapAdapterSpy;
+    service.resetInteraction();
+    expect(mapAdapterSpy.resetInteraction).toHaveBeenCalled();
+  }));
+
+  it('#activateDraw should call spy activateDraw', inject([MapService], (service: MapService) => {
+    (<any> service).mapAdapter = mapAdapterSpy;
+    service.activateDraw();
+    expect(mapAdapterSpy.activateDraw).toHaveBeenCalled();
+  }));
+
+  it('#activateModify should call spy activateModify', inject([MapService], (service: MapService) => {
+    (<any> service).mapAdapter = mapAdapterSpy;
+    service.activateModify();
+    expect(mapAdapterSpy.activateModify).toHaveBeenCalled();
   }));
 });
