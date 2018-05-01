@@ -1,12 +1,12 @@
 <div class="btn-toolbar" role="toolbar" aria-label="Map toolbar">
   <div class="btn-group mr-2" role="group" aria-label="Map interactions">
-    <button type="button" class="btn btn-secondary" title="Reset">
+    <button type="button" class="btn btn-secondary" (click)="reset()" title="Reset">
       <i class="fa fa-hand-paper-o"></i>
     </button>
-    <button type="button" class="btn btn-secondary" title="Select">
-      <i class="fa fa-mouse-pointer"></i>
+    <button type="button" class="btn btn-secondary" [class.active]="currentInteraction === 'draw'" (click)="draw()" title="Draw">
+      <i class="fa fa-plus-square-o"></i>
     </button>
-    <button type="button" class="btn btn-secondary" title="Add">
+    <button type="button" class="btn btn-secondary" [class.active]="currentInteraction === 'modify'" (click)="modify()" title="Modify">
       <i class="fa fa-pencil-square-o"></i>
     </button>
   </div>

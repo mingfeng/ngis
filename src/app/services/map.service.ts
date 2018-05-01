@@ -39,4 +39,16 @@ export class MapService {
   setOverlayVisibility(identifier: string, isVisible: boolean) {
     this.mapAdapter.setOverlayVisibility(identifier, isVisible);
   }
+
+  resetInteraction() {
+    this.mapAdapter.resetInteraction();
+  }
+
+  activateDraw() {
+    this.mapAdapter.activateDraw();
+  }
+
+  activateModify() {
+    this.mapAdapter.activateModify();
+  }
 }
