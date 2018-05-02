@@ -73,11 +73,7 @@ export class OlMapAdapter {
 
   setBasemap(identifier) {
     for (const [key, layer] of Object.entries(this.basemaps)) {
-      if (key === identifier) {
-        layer.setVisible(true);
-      } else {
-        layer.setVisible(false);
-      }
+      layer.setVisible(key === identifier);
     }
   }
 
