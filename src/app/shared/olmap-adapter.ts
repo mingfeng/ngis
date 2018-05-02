@@ -1,4 +1,5 @@
 import * as ol from 'openlayers';
+import { saveAs } from 'file-saver';
 
 import { Layer, LayerType } from './layer';
 import { MapConfig } from './map-config';
@@ -99,5 +100,15 @@ export class OlMapAdapter {
     this.select.setActive(true);
     this.modify.setActive(true);
     this.draw.setActive(false);
+  }
+
+  exportAsPNG() {
+    this.map.once('postcompose', (event: ol.render.Event) => {
+      const canvas = event.context.canvas;
+      canvas.toBlob((blob) => {
+        saveAs(blob, 'map.png');
+      });
+    });
+    this.map.renderSync();
   }
 }

@@ -25,7 +25,8 @@ describe('MapService', () => {
       'setOverlayVisibility',
       'resetInteraction',
       'activateDraw',
-      'activateModify'
+      'activateModify',
+      'exportAsPNG'
     ]);
   });
 
@@ -72,5 +73,11 @@ describe('MapService', () => {
     (<any> service).mapAdapter = mapAdapterSpy;
     service.activateModify();
     expect(mapAdapterSpy.activateModify).toHaveBeenCalled();
+  }));
+
+  it('#exportAsPNG should call spy exportAsPNG', inject([MapService], (service: MapService) => {
+    (<any> service).mapAdapter = mapAdapterSpy;
+    service.exportAsPNG();
+    expect(mapAdapterSpy.exportAsPNG).toHaveBeenCalled();
   }));
 });

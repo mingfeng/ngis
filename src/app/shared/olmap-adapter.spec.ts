@@ -11,7 +11,7 @@ describe('OLMapAdapter', () => {
 
   beforeEach(() => {
     mapContractorSpy = spyOn(ol, 'Map');
-    mapObjectSpy = jasmine.createSpyObj('Map', ['updateSize']);
+    mapObjectSpy = jasmine.createSpyObj('Map', ['updateSize', 'once', 'renderSync']);
     mapContractorSpy.and.returnValue(mapObjectSpy);
     mapAdapter  = new OlMapAdapter('map', LAYERS, MAP_CONFIG);
   });
@@ -74,5 +74,11 @@ describe('OLMapAdapter', () => {
     expect(selectSetActiveSpy).toHaveBeenCalledWith(true);
     expect(modifySetActiveSpy).toHaveBeenCalledWith(true);
     expect(drawSetActiveSpy).toHaveBeenCalledWith(false);
+  });
+
+  it('#exportAsPNG should call spy once and renderSync', () => {
+    mapAdapter.exportAsPNG();
+    expect(mapObjectSpy.once).toHaveBeenCalledWith('postcompose', jasmine.any(Function));
+    expect(mapObjectSpy.renderSync).toHaveBeenCalled();
   });
 });

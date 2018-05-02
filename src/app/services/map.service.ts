@@ -51,4 +51,8 @@ export class MapService {
   activateModify() {
     this.mapAdapter.activateModify();
   }
+
+  exportAsPNG() {
+    this.mapAdapter.exportAsPNG();
+  }
 }

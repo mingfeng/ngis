@@ -17,7 +17,8 @@ export default class OlLayerFactory {
       visible: false,
       source: new ol.source.XYZ({
         url: layer.url,
-        attributions: layer.attributions
+        attributions: layer.attributions,
+        crossOrigin: 'Anonymous'
       })
     });
   }
