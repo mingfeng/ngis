@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { forkJoin } from 'rxjs/observable/forkJoin';
+import { forkJoin } from 'rxjs';
 import * as ol from 'openlayers';
 
 import { OlMapAdapter } from '../shared/olmap-adapter';

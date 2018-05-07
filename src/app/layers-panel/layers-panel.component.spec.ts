@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 
 import { LayersPanelComponent } from './layers-panel.component';
 import { LayerService } from '../services/layer.service';
