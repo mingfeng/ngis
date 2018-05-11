@@ -7,7 +7,9 @@ import { Layer, LayerType } from '../shared/layer';
 import { LayerService } from './layer.service';
 import { MapConfigService } from './map-config.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MapService {
   private mapAdapter: OlMapAdapter;
   private _isInitialized = false;

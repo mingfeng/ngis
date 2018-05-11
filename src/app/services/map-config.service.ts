@@ -4,7 +4,9 @@ import { Observable, of } from 'rxjs';
 import { MapConfig } from '../shared/map-config';
 import { MAP_CONFIG } from '../shared/mocks';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MapConfigService {
 
   constructor() { }

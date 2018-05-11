@@ -4,7 +4,9 @@ import { Observable, of } from 'rxjs';
 import { Layer, LayerType } from '../shared/layer';
 import { LAYERS } from '../shared/mocks';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LayerService {
 
   constructor() { }
