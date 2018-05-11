@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable ,  of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { Layer, LayerType } from '../shared/layer';
 import { LAYERS } from '../shared/mocks';
