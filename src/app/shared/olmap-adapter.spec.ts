@@ -1,4 +1,5 @@
 import * as ol from 'openlayers';
+import * as FileSaver from 'file-saver';
 
 import { OlMapAdapter } from './olmap-adapter';
 import { LAYERS, MAP_CONFIG } from './mocks';
@@ -77,8 +78,21 @@ describe('OLMapAdapter', () => {
   });
 
   it('#exportAsPNG should call spy once and renderSync', () => {
+    mapObjectSpy.once.and.callFake((event: string, callback: Function) => {
+      const eventSpy = {
+        context: {
+          canvas: {
+            toBlob: jasmine.createSpy().and.callFake((toBlobCallback: Function) => {
+              return toBlobCallback('dummy-blob');
+            })
+          }
+        }
+      };
+      callback(eventSpy);
+    });
+    const saveAsSpy = spyOn(FileSaver, 'saveAs');
     mapAdapter.exportAsPNG();
-    expect(mapObjectSpy.once).toHaveBeenCalledWith('postcompose', jasmine.any(Function));
+    expect(saveAsSpy).toHaveBeenCalledWith('dummy-blob', 'map.png');
     expect(mapObjectSpy.renderSync).toHaveBeenCalled();
   });
 });

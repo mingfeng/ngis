@@ -9,7 +9,12 @@ describe('MapToolbarComponent', () => {
   let mapServiceSpy: jasmine.SpyObj<MapService>;
 
   beforeEach(async(() => {
-    mapServiceSpy = jasmine.createSpyObj('MapService', ['resetInteraction', 'activateDraw', 'activateModify']);
+    mapServiceSpy = jasmine.createSpyObj('MapService', [
+      'resetInteraction',
+      'activateDraw',
+      'activateModify',
+      'exportAsPNG',
+    ]);
 
     TestBed.configureTestingModule({
       declarations: [ MapToolbarComponent ],
@@ -61,5 +66,11 @@ describe('MapToolbarComponent', () => {
 
     mapServiceSpy = TestBed.get(MapService);
     expect(mapServiceSpy.activateModify).toHaveBeenCalled();
+  });
+
+  it('#exportAsPNG should call spy map service exportAsPNG', () => {
+    component.exportAsPNG();
+    mapServiceSpy = TestBed.get(MapService);
+    expect(mapServiceSpy.exportAsPNG).toHaveBeenCalled();
   });
 });
