@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { AngularSplitModule } from 'angular-split';
 
 import { MainComponent } from './main.component';
 import { MapService } from '../services/map.service';
@@ -27,7 +26,6 @@ describe('MainComponent', () => {
         SidePanelStubComponent,
         SearchPanelStubComponent
       ],
-      imports: [AngularSplitModule],
       providers: [
         { provide: MapService, useValue: mapServiceSpy}
       ]

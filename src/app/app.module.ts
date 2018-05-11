@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AngularSplitModule } from 'angular-split';
 
 import { AppComponent } from './app.component';
 import { MapService } from './services/map.service';
@@ -27,8 +26,7 @@ import { MapToolbarComponent } from './map-toolbar/map-toolbar.component';
     MapToolbarComponent
   ],
   imports: [
-    BrowserModule,
-    AngularSplitModule
+    BrowserModule
   ],
   providers: [MapService, LayerService, MapConfigService],
   bootstrap: [AppComponent]

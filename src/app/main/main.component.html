@@ -1,10 +1,10 @@
 <div class="main">
-  <split [direction]="horizontal" gutterSize=5 (dragProgress)="updateMapSize()" (dragEnd)="updateMapSize()">
-    <split-area size="20">
+  <div class="row no-gutters">
+    <div class="col-md-2">
       <app-side-panel></app-side-panel>
-    </split-area>
-    <split-area size="80">
+    </div>
+    <div class="col-md-10">
       <app-map></app-map>
-    </split-area>
-  </split>
+    </div>
+ </div>
 </div>
