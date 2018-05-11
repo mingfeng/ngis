@@ -34,11 +34,6 @@ describe('MapService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('#initialize should set isInitialied to true', inject([MapService], (service: MapService) => {
-    service.initialize('testmap');
-    expect(service.isInitialized).toBeTruthy();
-  }));
-
   it('#updateMapSize should call spy updateMapSize', inject([MapService], (service: MapService) => {
     (<any> service).mapAdapter = mapAdapterSpy;
     service.updateMapSize();

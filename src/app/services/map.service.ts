@@ -12,13 +12,8 @@ import { MapConfigService } from './map-config.service';
 })
 export class MapService {
   private mapAdapter: OlMapAdapter;
-  private _isInitialized = false;
 
   constructor(private layerService: LayerService, private mapConfigService: MapConfigService) { }
-
-  get isInitialized() {
-    return this._isInitialized;
-  }
 
   initialize(mapId: string) {
     forkJoin(
@@ -26,7 +21,6 @@ export class MapService {
       this.mapConfigService.getMapConfig()
     ).subscribe(([layers, mapConfig]) => {
       this.mapAdapter = new OlMapAdapter(mapId, layers, mapConfig);
-      this._isInitialized = true;
     });
   }
 
