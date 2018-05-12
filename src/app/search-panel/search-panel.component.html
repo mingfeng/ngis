@@ -1,9 +1,16 @@
 <div class="search-panel">
   <div class="p-3 border-bottom">
       <div class="input-group mb-3">
-        <input id="search "type="text" class="form-control" placeholder="Search..." aria-label="search">
+        <input #searchInput
+          class="form-control"
+          placeholder="Search..."
+          aria-label="search"
+          (keyup.enter)="search(searchInput.value)"
+        >
         <div class="input-group-append">
-          <button type="submit" class="btn btn-outline-secondary">
+          <button class="btn btn-outline-secondary"
+            (click)="search(searchInput.value)"
+          >
             <i class="fa fa-search"></i>
           </button>
         </div>
@@ -11,11 +18,12 @@
   </div>
   <div class="search-results">
     <div class="list-group list-group-flush border-bottom">
-      <a href="#" class="list-group-item list-group-item-action p-2">Cras justo odio</a>
-      <a href="#" class="list-group-item list-group-item-action p-2">Dapibus ac facilisis in</a>
-      <a href="#" class="list-group-item list-group-item-action p-2">Morbi leo risus</a>
-      <a href="#" class="list-group-item list-group-item-action p-2">Porta ac consectetur ac</a>
-      <a href="#" class="list-group-item list-group-item-action p-2">Vestibulum at eros</a>
-      </div>
+      <a href="#" class="list-group-item list-group-item-action p-2"
+        *ngFor="let searchItem of searchItems"
+        (click)="select(searchItem)"
+      >
+        {{ searchItem.name }}
+      </a>
+    </div>
   </div>
 </div>

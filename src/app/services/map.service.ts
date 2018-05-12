@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 import * as ol from 'openlayers';
 
 import { OlMapAdapter } from '../shared/olmap-adapter';
 import { Layer, LayerType } from '../shared/layer';
 import { LayerService } from './layer.service';
 import { MapConfigService } from './map-config.service';
+import { SearchItem } from '../shared/search-item';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
   private mapAdapter: OlMapAdapter;
+  searchResult: Subject<SearchItem[]> = new Subject<SearchItem[]>();
 
   constructor(private layerService: LayerService, private mapConfigService: MapConfigService) { }
 
@@ -50,5 +52,14 @@ export class MapService {
 
   exportAsPNG() {
     this.mapAdapter.exportAsPNG();
+  }
+
+  selectSearchItem(searchItem: SearchItem) {
+    this.mapAdapter.selectSearchItem(searchItem);
+  }
+
+  searchByText(text: string) {
+    const searchItems = this.mapAdapter.searchByText(text);
+    this.searchResult.next(searchItems);
   }
 }

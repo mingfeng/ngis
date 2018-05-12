@@ -4,6 +4,8 @@ import { saveAs } from 'file-saver';
 import { Layer, LayerType } from './layer';
 import { MapConfig } from './map-config';
 import OlLayerFactory from './ollayer-factory';
+import { Extent } from './extent';
+import { SearchItem } from './search-item';
 
 export class OlMapAdapter {
   private map: ol.Map;
@@ -110,5 +112,23 @@ export class OlMapAdapter {
       });
     });
     this.map.renderSync();
+  }
+
+  selectSearchItem(searchItem: SearchItem) {
+    const layer = this.getDrawLayer();
+    const feature = layer.getSource().getFeatureById(searchItem.id);
+    this.map.getView().fit(feature.getGeometry().getExtent());
+  }
+
+  searchByText(text: string): SearchItem[] {
+    const layer = this.getDrawLayer();
+    const features = layer.getSource().getFeatures().filter(feature => (<string>feature.get('name')).includes(text));
+    return features.map(feature => ({ id: feature.getId(), name: feature.get('name') }));
+  }
+
+  searchByExtent(extent: Extent) {
+    const layer = this.getDrawLayer();
+    const features = layer.getSource().getFeaturesInExtent(extent);
+    return features.map(feature => ({ id: feature.getId(), name: feature.get('name') }));
   }
 }
