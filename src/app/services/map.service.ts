@@ -81,7 +81,8 @@ export class MapService {
   }
 
   private getDrawLayer() {
-    // TODO: for now we just assume assume the country layer is drawable
+    // Currently we only use countries as the single data source, hence
+    // all the operations are based on the countries layer.
     return <ol.layer.Vector>this.overlays['countries'];
   }
 
