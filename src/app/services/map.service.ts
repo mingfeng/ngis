@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { forkJoin, Subject } from 'rxjs';
 import * as ol from 'openlayers';
+import { saveAs } from  'file-saver';
 
 import { Layer, LayerType } from '../shared/layer';
 import { MapConfig } from '../shared/map-config';
