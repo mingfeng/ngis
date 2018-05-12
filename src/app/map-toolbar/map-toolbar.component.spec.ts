@@ -13,7 +13,8 @@ describe('MapToolbarComponent', () => {
       'resetInteraction',
       'activateDraw',
       'activateModify',
-      'exportAsPNG',
+      'activateDragBox',
+      'exportAsPNG'
     ]);
 
     TestBed.configureTestingModule({
@@ -66,6 +67,18 @@ describe('MapToolbarComponent', () => {
 
     mapServiceSpy = TestBed.get(MapService);
     expect(mapServiceSpy.activateModify).toHaveBeenCalled();
+  });
+
+  it('#boxSearch should call spy map service activateDragBox', () => {
+    component.boxSearch();
+    expect(component.currentInteraction).toBe('box-search');
+
+    fixture.detectChanges();
+    const button: HTMLElement = fixture.nativeElement.querySelector('button[title="Box search"]');
+    expect(button.getAttribute('class')).toContain('active');
+
+    mapServiceSpy = TestBed.get(MapService);
+    expect(mapServiceSpy.activateDragBox).toHaveBeenCalled();
   });
 
   it('#exportAsPNG should call spy map service exportAsPNG', () => {

@@ -21,6 +21,11 @@ export class MapToolbarComponent implements OnInit {
     this.mapService.resetInteraction();
   }
 
+  boxSearch() {
+    this.currentInteraction = 'box-search';
+    this.mapService.activateDragBox();
+  }
+
   draw() {
     this.currentInteraction = 'draw';
     this.mapService.activateDraw();

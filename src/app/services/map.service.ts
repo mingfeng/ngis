@@ -78,7 +78,7 @@ export class MapService {
   private setupMap(target: string, mapConfig: MapConfig) {
     this.map = new ol.Map({
       target,
-      interactions: ol.interaction.defaults().extend([this.select, this.modify, this.draw]),
+      interactions: ol.interaction.defaults().extend([this.select, this.modify, this.draw, this.dragBox]),
       layers: Object.values(this.basemaps).concat(Object.values(this.overlays)),
       view: new ol.View({
         center: ol.proj.fromLonLat(mapConfig.center),
@@ -162,8 +162,11 @@ export class MapService {
 
   searchByExtent(extent: ol.Extent) {
     const layer = this.getDrawLayer();
-    const features = layer.getSource().getFeaturesInExtent(extent);
-    const searchItems = features.map(feature => ({ id: feature.getId(), name: feature.get('name') }));
+    const searchItems = [];
+    layer.getSource().forEachFeatureIntersectingExtent(extent, feature => {
+      searchItems.push({ id: feature.getId(), name: feature.get('name') });
+      return false;
+    });
     this.searchResult.next(searchItems);
   }
 }

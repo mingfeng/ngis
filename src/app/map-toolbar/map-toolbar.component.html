@@ -3,6 +3,9 @@
     <button type="button" class="btn btn-secondary" (click)="reset()" title="Reset">
       <i class="fa fa-hand-paper-o"></i>
     </button>
+    <button type="button" class="btn btn-secondary" [class.active]="currentInteraction === 'box-search'" (click)="boxSearch()" title="Box search">
+      <i class="fa fa-mouse-pointer"></i>
+    </button>
     <button type="button" class="btn btn-secondary" [class.active]="currentInteraction === 'draw'" (click)="draw()" title="Draw">
       <i class="fa fa-plus-square-o"></i>
     </button>
