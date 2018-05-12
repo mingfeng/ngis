@@ -5,10 +5,10 @@ import { saveAs } from  'file-saver';
 
 import { Layer, LayerType } from '../shared/layer';
 import { MapConfig } from '../shared/map-config';
-import { LayerService } from './layer.service';
 import { SearchItem } from '../shared/search-item';
+import { LayerService } from './layer.service';
 import { MapConfigService } from './map-config.service';
-import OlLayerFactory from '../shared/ollayer-factory';
+import OlLayerFactory from './ollayer-factory';
 
 @Injectable({
   providedIn: 'root'
