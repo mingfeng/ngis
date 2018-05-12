@@ -21,6 +21,7 @@ export class MapService {
   private select: ol.interaction.Select;
   private modify: ol.interaction.Modify;
   private draw: ol.interaction.Draw;
+  private dragBox: ol.interaction.DragBox;
 
   searchResult: Subject<SearchItem[]> = new Subject<SearchItem[]>();
 
@@ -66,6 +67,12 @@ export class MapService {
       type: 'Polygon'
     });
     this.draw.setActive(false);
+
+    this.dragBox = new ol.interaction.DragBox();
+    this.dragBox.on('boxend', () => {
+      const extent = this.dragBox.getGeometry().getExtent();
+      this.searchByExtent(extent);
+    });
   }
 
   private setupMap(target: string, mapConfig: MapConfig) {
@@ -106,18 +113,28 @@ export class MapService {
     this.select.setActive(false);
     this.modify.setActive(false);
     this.draw.setActive(false);
+    this.dragBox.setActive(false);
   }
 
   activateDraw() {
     this.select.setActive(false);
     this.modify.setActive(false);
     this.draw.setActive(true);
+    this.dragBox.setActive(false);
   }
 
   activateModify() {
     this.select.setActive(true);
     this.modify.setActive(true);
     this.draw.setActive(false);
+    this.dragBox.setActive(false);
+  }
+
+  activateDragBox() {
+    this.select.setActive(false);
+    this.modify.setActive(false);
+    this.draw.setActive(false);
+    this.dragBox.setActive(true);
   }
 
   exportAsPNG() {
@@ -139,6 +156,13 @@ export class MapService {
   searchByText(text: string) {
     const layer = this.getDrawLayer();
     const features = layer.getSource().getFeatures().filter(feature => (<string>feature.get('name')).includes(text));
+    const searchItems = features.map(feature => ({ id: feature.getId(), name: feature.get('name') }));
+    this.searchResult.next(searchItems);
+  }
+
+  searchByExtent(extent: ol.Extent) {
+    const layer = this.getDrawLayer();
+    const features = layer.getSource().getFeaturesInExtent(extent);
     const searchItems = features.map(feature => ({ id: feature.getId(), name: feature.get('name') }));
     this.searchResult.next(searchItems);
   }
