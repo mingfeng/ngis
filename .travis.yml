@@ -21,7 +21,8 @@ install:
   - npm install
 
 script:
-  - npm run lint
-  - xvfb-run -a npm run test -- --code-coverage --single-run --no-progress --browser=ChromeNoSandbox
-  - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
+  - ng lint
+  - ng build
+  - xvfb-run -a ng test --watch=false --code-coverage --browsers=ChromeNoSandbox
+  - xvfb-run -a ng e2e --protractor-config=protractor-ci.conf.js
   - codecov
