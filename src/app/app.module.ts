@@ -12,6 +12,7 @@ import { LayersPanelComponent } from './layers-panel/layers-panel.component';
 import { LayerService } from './services/layer.service';
 import { MapConfigService } from './services/map-config.service';
 import { MapToolbarComponent } from './map-toolbar/map-toolbar.component';
+import { CountryDetailComponent } from './country-detail/country-detail.component';
 
 
 @NgModule({
@@ -23,10 +24,11 @@ import { MapToolbarComponent } from './map-toolbar/map-toolbar.component';
     SearchPanelComponent,
     SidePanelComponent,
     LayersPanelComponent,
-    MapToolbarComponent
+    MapToolbarComponent,
+    CountryDetailComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
   ],
   providers: [MapService, LayerService, MapConfigService],
   bootstrap: [AppComponent]
