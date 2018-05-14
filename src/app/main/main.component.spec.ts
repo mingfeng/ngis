@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 
 import { MainComponent } from './main.component';
 import { MapService } from '../services/map.service';
+import { LayoutService } from '../services/layout.service';
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -14,9 +15,10 @@ describe('MainComponent', () => {
   @Component({selector: 'app-side-panel', template: ''})
   class SidePanelStubComponent {}
 
-  @Component({selector: 'app-search-panel', template: ''})
-  class SearchPanelStubComponent {}
+  @Component({selector: 'app-country-detail', template: ''})
+  class CountryDetailStubComponent {}
 
+  const layoutService = new LayoutService();
   const mapServiceSpy = jasmine.createSpyObj('MapService', ['updateMapSize']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -24,10 +26,11 @@ describe('MainComponent', () => {
         MainComponent,
         MapStubComponent,
         SidePanelStubComponent,
-        SearchPanelStubComponent
+        CountryDetailStubComponent
       ],
       providers: [
-        { provide: MapService, useValue: mapServiceSpy}
+        { provide: LayoutService, useValue: layoutService },
+        { provide: MapService, useValue: mapServiceSpy }
       ]
     })
     .compileComponents();
@@ -43,10 +46,42 @@ describe('MainComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call MapService updateMapSize method', () => {
-    fixture = TestBed.createComponent(MainComponent);
-    component = fixture.componentInstance;
-    component.updateMapSize();
-    expect(mapServiceSpy.updateMapSize.calls.count()).toBe(1);
+  it('should hide side panel column and detail panel column on start', () => {
+    const sidePanelColumn = fixture.nativeElement.querySelector('#side-panel-col');
+    expect(sidePanelColumn.classList.contains('d-none')).toBeTruthy();
+    const detailpanelColumn = fixture.nativeElement.querySelector('#detail-panel-col');
+    expect(detailpanelColumn.classList.contains('d-none')).toBeTruthy();
+  });
+
+  it('should show/hide side panel column when layout service calls showSidePanel/hideSidePanel', () => {
+    const sidePanelColumn = fixture.nativeElement.querySelector('#side-panel-col');
+
+    layoutService.showSidePanel();
+    fixture.detectChanges();
+    expect(sidePanelColumn.classList.contains('d-none')).toBeFalsy();
+
+    layoutService.hideSidePanel();
+    fixture.detectChanges();
+    expect(sidePanelColumn.classList.contains('d-none')).toBeTruthy();
+  });
+
+  it('should show/hide detail panel column when layout service calls showDetailPanel/hideDetailPanel', () => {
+    const detailpanelColumn = fixture.nativeElement.querySelector('#detail-panel-col');
+
+    layoutService.showDetailPanel();
+    fixture.detectChanges();
+    expect(detailpanelColumn.classList.contains('d-none')).toBeFalsy();
+
+    layoutService.hideDetailPanel();
+    fixture.detectChanges();
+    expect(detailpanelColumn.classList.contains('d-none')).toBeTruthy();
+  });
+
+  it('should call update map size after layout is updated', () => {
+    layoutService.showSidePanel();
+    layoutService.hideSidePanel();
+    layoutService.showDetailPanel();
+    layoutService.hideDetailPanel();
+    expect(mapServiceSpy.updateMapSize).toHaveBeenCalledTimes(4);
   });
 });

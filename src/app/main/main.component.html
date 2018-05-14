@@ -1,12 +1,12 @@
 <div class="main">
   <div class="row no-gutters">
-    <div class="col-md-2">
+    <div id="side-panel-col" class="col-md-2" [class.d-none]="!isSidePanelVisible">
       <app-side-panel></app-side-panel>
     </div>
     <div class="col">
       <app-map></app-map>
     </div>
-    <div class="col-md-2">
+    <div id="detail-panel-col" class="col-md-2" [class.d-none]="!isDetailPanelVisible">
       <app-country-detail></app-country-detail>
     </div>
  </div>

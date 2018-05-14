@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MapService } from '../services/map.service';
+import { LayoutService } from '../services/layout.service';
 
 declare var $: any;
 
@@ -12,7 +13,7 @@ declare var $: any;
 export class SidePanelComponent implements OnInit {
   activeTab = 'layers';
 
-  constructor(private mapService: MapService) { }
+  constructor(private mapService: MapService, private layoutService: LayoutService) { }
 
   ngOnInit() {
     this.mapService.searchResult.subscribe({
@@ -20,4 +21,7 @@ export class SidePanelComponent implements OnInit {
     });
   }
 
+  hideSidePanel() {
+    this.layoutService.hideSidePanel();
+  }
 }
