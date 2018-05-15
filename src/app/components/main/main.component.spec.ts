@@ -2,8 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 
 import { MainComponent } from './main.component';
-import { MapService } from '../services/map.service';
-import { LayoutService } from '../services/layout.service';
+import { MapService } from '../../services/map.service';
+import { LayoutService } from '../../services/layout.service';
 
 describe('MainComponent', () => {
   let component: MainComponent;

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MapService } from '../services/map.service';
+import { MapService } from '../../services/map.service';
 import { SidePanelComponent } from './side-panel.component';
 
 describe('SidePanelComponent', () => {

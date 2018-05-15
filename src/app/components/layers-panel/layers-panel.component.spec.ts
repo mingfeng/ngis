@@ -2,11 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
 import { LayersPanelComponent } from './layers-panel.component';
-import { LayerService } from '../services/layer.service';
-import { MapService } from '../services/map.service';
-import { MapConfigService } from '../services/map-config.service';
-import { Layer, LayerType } from '../shared/layer';
-import { LAYERS, MAP_CONFIG } from '../shared/mocks';
+import { LayerService } from '../../services/layer.service';
+import { MapService } from '../../services/map.service';
+import { MapConfigService } from '../../services/map-config.service';
+import { Layer, LayerType } from '../../shared/layer';
+import { LAYERS, MAP_CONFIG } from '../../shared/mocks';
 
 describe('LayersPanelComponent', () => {
   let component: LayersPanelComponent;

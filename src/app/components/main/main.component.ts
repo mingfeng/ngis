@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnInit, ElementRef } from '@angular/core';
-import { MapService } from '../services/map.service';
-import { LayoutService } from '../services/layout.service';
-import { isEmbeddedView } from '@angular/core/src/view/util';
+import { MapService } from '../../services/map.service';
+import { LayoutService } from '../../services/layout.service';
 
 @Component({
   selector: 'app-main',

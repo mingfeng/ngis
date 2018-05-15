@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LayerService } from '../services/layer.service';
-import { MapService } from '../services/map.service';
-import { Layer } from '../shared/layer';
-import { MapConfigService } from '../services/map-config.service';
+import { LayerService } from '../../services/layer.service';
+import { MapService } from '../../services/map.service';
+import { Layer } from '../../shared/layer';
+import { MapConfigService } from '../../services/map-config.service';
 
 @Component({
   selector: 'app-layers-panel',

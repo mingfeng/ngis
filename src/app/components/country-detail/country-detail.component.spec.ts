@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CountryDetailComponent } from './country-detail.component';
-import { LayoutService } from '../services/layout.service';
+import { LayoutService } from '../../services/layout.service';
 
 describe('CountryDetailComponent', () => {
   let component: CountryDetailComponent;

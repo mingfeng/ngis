@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MapService } from '../services/map.service';
-import { LayoutService } from '../services/layout.service';
+import { MapService } from '../../services/map.service';
+import { LayoutService } from '../../services/layout.service';
 
 declare var $: any;
 
