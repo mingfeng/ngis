@@ -1,54 +1,76 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { LayoutService } from './layout.service';
+import { MapService } from './map.service';
+import { MainComponent } from '../components/main/main.component';
 
 describe('LayoutService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [LayoutService]
-    });
-  });
+  let component: MainComponent;
+  let fixture: ComponentFixture<MainComponent>;
 
-  const spy = jasmine.createSpy();
-  beforeEach(inject([LayoutService], (service: LayoutService) => {
-    service.sidePanelVisibility.subscribe({
-      next: value => spy(value)
-    });
+  @Component({selector: 'app-map', template: ''})
+  class MapStubComponent {}
+
+  @Component({selector: 'app-side-panel', template: ''})
+  class SidePanelStubComponent {}
+
+  @Component({selector: 'app-country-detail', template: ''})
+  class CountryDetailStubComponent {}
+
+  const mapServiceSpy = jasmine.createSpyObj('MapService', ['updateMapSize']);
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        MainComponent,
+        MapStubComponent,
+        SidePanelStubComponent,
+        CountryDetailStubComponent
+      ],
+      providers: [
+        LayoutService,
+        { provide: MapService, useValue: mapServiceSpy }
+      ]
+    })
+    .compileComponents();
   }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(MainComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    mapServiceSpy.updateMapSize.calls.reset();
+  });
 
   it('should be created', inject([LayoutService], (service: LayoutService) => {
     expect(service).toBeTruthy();
   }));
 
-  it('#sidePanelVisibility BehaviorSubject should have false vallue on start', inject([LayoutService], (service: LayoutService) => {
-    expect(service.sidePanelVisibility.getValue()).toBeFalsy();
-  }));
-
-  it('#showSidePanel should emit a true value on #sidePanelVisibility', inject([LayoutService], (service: LayoutService) => {
+  it('#showSidePanel should display side panel (style display is empty)', inject([LayoutService], (service: LayoutService) => {
     service.showSidePanel();
-    expect(spy).toHaveBeenCalledWith(true);
-    expect(service.sidePanelVisibility.getValue()).toBeTruthy();
+    const sidePanelColumn: HTMLElement = fixture.nativeElement.querySelector('#side-panel-col');
+    expect(sidePanelColumn.style.display).toBe('');
+    expect(mapServiceSpy.updateMapSize).toHaveBeenCalledTimes(1);
   }));
 
-  it('#hideSidePanel should emit a false value on #sidePanelVisibility', inject([LayoutService], (service: LayoutService) => {
+  it('#hideSidePanel should hide side panel (style display is "none")', inject([LayoutService], (service: LayoutService) => {
     service.hideSidePanel();
-    expect(spy).toHaveBeenCalledWith(false);
-    expect(service.sidePanelVisibility.getValue()).toBeFalsy();
+    const sidePanelColumn: HTMLElement = fixture.nativeElement.querySelector('#side-panel-col');
+    expect(sidePanelColumn.style.display).toBe('none');
+    expect(mapServiceSpy.updateMapSize).toHaveBeenCalledTimes(1);
   }));
 
-  it('#detailPanelVisibility BehaviorSubject should have false vallue on start', inject([LayoutService], (service: LayoutService) => {
-    expect(service.detailPanelVisibility.getValue()).toBeFalsy();
-  }));
-
-  it('#showDetailPanel should emit a true value on #detailPanelVisibility', inject([LayoutService], (service: LayoutService) => {
+  it('#showDetailPanel should display detail panel (style display is empty', inject([LayoutService], (service: LayoutService) => {
     service.showDetailPanel();
-    expect(spy).toHaveBeenCalledWith(true);
-    expect(service.detailPanelVisibility.getValue()).toBeTruthy();
+    const detailPanelColumn: HTMLElement = fixture.nativeElement.querySelector('#detail-panel-col');
+    expect(detailPanelColumn.style.display).toBe('');
+    expect(mapServiceSpy.updateMapSize).toHaveBeenCalledTimes(1);
   }));
 
-  it('#hideDetailPanel should emit a false value on #detailPanelVisibility', inject([LayoutService], (service: LayoutService) => {
+  it('#hideDetailPanel should hide detail panel (style display is "none")', inject([LayoutService], (service: LayoutService) => {
     service.hideDetailPanel();
-    expect(spy).toHaveBeenCalledWith(false);
-    expect(service.detailPanelVisibility.getValue()).toBeFalsy();
+    const detailPanelColumn: HTMLElement = fixture.nativeElement.querySelector('#detail-panel-col');
+    expect(detailPanelColumn.style.display).toBe('none');
+    expect(mapServiceSpy.updateMapSize).toHaveBeenCalledTimes(1);
   }));
 });

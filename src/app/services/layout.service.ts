@@ -1,44 +1,33 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { MapService } from './map.service';
+
+declare var $: any;
 
 @Injectable({
   providedIn: 'root'
 })
 export class LayoutService {
-  sidePanelVisibility = new BehaviorSubject<boolean>(false);
-  detailPanelVisibility = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
-
-  get isSidePanelVisible() {
-    return this.sidePanelVisibility.getValue();
-  }
+  constructor(private mapService: MapService) { }
 
   showSidePanel() {
-    if (!this.isSidePanelVisible) {
-      this.sidePanelVisibility.next(true);
-    }
+    $('#side-panel-col').show();
+    this.mapService.updateMapSize();
   }
 
   hideSidePanel() {
-    if (this.isSidePanelVisible) {
-      this.sidePanelVisibility.next(false);
-    }
-  }
-
-  get isDetailPanelVisible() {
-    return this.detailPanelVisibility.getValue();
+    $('#side-panel-col').hide();
+    this.mapService.updateMapSize();
   }
 
   showDetailPanel() {
-    if (!this.isDetailPanelVisible) {
-      this.detailPanelVisibility.next(true);
-    }
+    $('#detail-panel-col').show();
+    this.mapService.updateMapSize();
   }
 
   hideDetailPanel() {
-    if (this.isDetailPanelVisible) {
-      this.detailPanelVisibility.next(false);
-    }
+    $('#detail-panel-col').hide();
+    this.mapService.updateMapSize();
   }
 }

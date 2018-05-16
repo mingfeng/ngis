@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MapService } from '../../services/map.service';
 import { SidePanelComponent } from './side-panel.component';
+import { LayoutService } from '../../services/layout.service';
 
 describe('SidePanelComponent', () => {
-  let component: SidePanelComponent;
-  let fixture: ComponentFixture<SidePanelComponent>;
-  let mapService: MapService;
-
   @Component({selector: 'app-search-panel', template: ''})
   class SearchPanelStubComponent {}
 
   @Component({selector: 'app-layers-panel', template: ''})
   class LayersPanelStubComponent {}
 
-  beforeEach(async(() => {
-    mapService = new MapService(undefined, undefined);
+  let component: SidePanelComponent;
+  let fixture: ComponentFixture<SidePanelComponent>;
+  const mapService = new MapService(undefined, undefined);
+  const layoutService = jasmine.createSpyObj('LayoutService', ['hideSidePanel']);
 
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         SidePanelComponent,
@@ -25,7 +25,8 @@ describe('SidePanelComponent', () => {
         LayersPanelStubComponent
       ],
       providers: [
-        { provide: MapService, useValue: mapService }
+        { provide: MapService, useValue: mapService },
+        { provide: LayoutService, useValue: layoutService }
       ]
     })
     .compileComponents();
@@ -56,5 +57,10 @@ describe('SidePanelComponent', () => {
     const searchTabContent = fixture.nativeElement.querySelector('#search');
     expect(searchTabContent.classList.contains('show')).toBeTruthy();
     expect(searchTabContent.classList.contains('active')).toBeTruthy();
+  });
+
+  it('#hideSidePanel should call spy layout service hideSidePanel', () => {
+    component.hideSidePanel();
+    expect(layoutService.hideSidePanel).toHaveBeenCalledTimes(1);
   });
 });
