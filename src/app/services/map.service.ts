@@ -73,6 +73,7 @@ export class MapService {
       const extent = this.dragBox.getGeometry().getExtent();
       this.searchByExtent(extent);
     });
+    this.dragBox.setActive(false);
   }
 
   private setupMap(target: string, mapConfig: MapConfig) {
