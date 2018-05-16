@@ -2,17 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { MapComponent } from './components/map/map.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MainComponent } from './components/main/main.component';
+import { SearchPanelComponent } from './components/search-panel/search-panel.component';
+import { SidePanelComponent } from './components/side-panel/side-panel.component';
+import { LayersPanelComponent } from './components/layers-panel/layers-panel.component';
+import { MapToolbarComponent } from './components/map-toolbar/map-toolbar.component';
+import { CountryDetailComponent } from './components/country-detail/country-detail.component';
 import { MapService } from './services/map.service';
-import { MapComponent } from './map/map.component';
-import { HeaderComponent } from './header/header.component';
-import { MainComponent } from './main/main.component';
-import { SearchPanelComponent } from './search-panel/search-panel.component';
-import { SidePanelComponent } from './side-panel/side-panel.component';
-import { LayersPanelComponent } from './layers-panel/layers-panel.component';
 import { LayerService } from './services/layer.service';
 import { MapConfigService } from './services/map-config.service';
-import { MapToolbarComponent } from './map-toolbar/map-toolbar.component';
-import { CountryDetailComponent } from './country-detail/country-detail.component';
 
 
 @NgModule({
