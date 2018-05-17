@@ -4,6 +4,9 @@ import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing'
 import { LayoutService } from './layout.service';
 import { MapService } from './map.service';
 import { MainComponent } from '../components/main/main.component';
+import { Subject } from 'rxjs';
+import { SearchItem } from '../shared/search-item';
+import { SidePanelComponent } from '../components/side-panel/side-panel.component';
 
 describe('LayoutService', () => {
   let component: MainComponent;
@@ -12,19 +15,25 @@ describe('LayoutService', () => {
   @Component({selector: 'app-map', template: ''})
   class MapStubComponent {}
 
-  @Component({selector: 'app-side-panel', template: ''})
-  class SidePanelStubComponent {}
+  @Component({selector: 'app-search-panel', template: ''})
+  class SearchPanelStubComponent {}
+
+  @Component({selector: 'app-layers-panel', template: ''})
+  class LayersPanelStubComponent {}
 
   @Component({selector: 'app-country-detail', template: ''})
   class CountryDetailStubComponent {}
 
   const mapServiceSpy = jasmine.createSpyObj('MapService', ['updateMapSize']);
+  mapServiceSpy.searchResult = new Subject<SearchItem[]>();
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         MainComponent,
         MapStubComponent,
-        SidePanelStubComponent,
+        SidePanelComponent,
+        LayersPanelStubComponent,
+        SearchPanelStubComponent,
         CountryDetailStubComponent
       ],
       providers: [
@@ -46,11 +55,28 @@ describe('LayoutService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('#showSidePanel should display side panel (style display is empty)', inject([LayoutService], (service: LayoutService) => {
-    service.showSidePanel();
-    const sidePanelColumn: HTMLElement = fixture.nativeElement.querySelector('#side-panel-col');
-    expect(sidePanelColumn.style.display).toBe('');
-    expect(mapServiceSpy.updateMapSize).toHaveBeenCalledTimes(1);
+  it('should show search panel if map service search result is updated', inject([LayoutService], (service: LayoutService) => {
+    mapServiceSpy.searchResult.next([]);
+    const layersTab: HTMLElement = fixture.nativeElement.querySelector('#layers-tab');
+    expect(layersTab.classList.contains('active')).toBeFalsy();
+    const searchTab: HTMLElement = fixture.nativeElement.querySelector('#search-tab');
+    expect(searchTab.classList.contains('active')).toBeTruthy();
+  }));
+
+  it('#showLayersPanel should show layers panel', inject([LayoutService], (service: LayoutService) => {
+    service.showLayersPanel();
+    const layersTab: HTMLElement = fixture.nativeElement.querySelector('#layers-tab');
+    expect(layersTab.classList.contains('active')).toBeTruthy();
+    const searchTab: HTMLElement = fixture.nativeElement.querySelector('#search-tab');
+    expect(searchTab.classList.contains('active')).toBeFalsy();
+  }));
+
+  it('#showSearchPanel should show search panel', inject([LayoutService], (service: LayoutService) => {
+    service.showSearchPanel();
+    const layersTab: HTMLElement = fixture.nativeElement.querySelector('#layers-tab');
+    expect(layersTab.classList.contains('active')).toBeFalsy();
+    const searchTab: HTMLElement = fixture.nativeElement.querySelector('#search-tab');
+    expect(searchTab.classList.contains('active')).toBeTruthy();
   }));
 
   it('#hideSidePanel should hide side panel (style display is "none")', inject([LayoutService], (service: LayoutService) => {

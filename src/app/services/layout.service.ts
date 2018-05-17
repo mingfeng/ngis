@@ -9,7 +9,11 @@ declare var $: any;
 })
 export class LayoutService {
 
-  constructor(private mapService: MapService) { }
+  constructor(private mapService: MapService) {
+    this.mapService.searchResult.subscribe({
+      next: () => this.showSearchPanel()
+    });
+  }
 
   showLayersPanel() {
     $('#side-panel-col').show();
@@ -20,11 +24,6 @@ export class LayoutService {
   showSearchPanel() {
     $('#side-panel-col').show();
     $('#side-panel-tab a[href="#search"]').tab('show');
-    this.mapService.updateMapSize();
-  }
-
-  showSidePanel() {
-    $('#side-panel-col').show();
     this.mapService.updateMapSize();
   }
 

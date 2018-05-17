@@ -42,23 +42,6 @@ describe('SidePanelComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should activate layers tab on start', () => {
-    const layersTab = fixture.nativeElement.querySelector('a[href="#layers"]');
-    expect(layersTab.classList.contains('active')).toBeTruthy();
-    const layersTabContent = fixture.nativeElement.querySelector('#layers');
-    expect(layersTabContent.classList.contains('show')).toBeTruthy();
-    expect(layersTabContent.classList.contains('active')).toBeTruthy();
-  });
-
-  it('should activate search tab when map service search result is updated', () => {
-    mapService.searchResult.next([]);
-    const searchTab = fixture.nativeElement.querySelector('a[href="#search"]');
-    expect(searchTab.classList.contains('active')).toBeTruthy();
-    const searchTabContent = fixture.nativeElement.querySelector('#search');
-    expect(searchTabContent.classList.contains('show')).toBeTruthy();
-    expect(searchTabContent.classList.contains('active')).toBeTruthy();
-  });
-
   it('#hideSidePanel should call spy layout service hideSidePanel', () => {
     component.hideSidePanel();
     expect(layoutService.hideSidePanel).toHaveBeenCalledTimes(1);

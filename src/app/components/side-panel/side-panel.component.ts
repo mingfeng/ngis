@@ -1,25 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { MapService } from '../../services/map.service';
 import { LayoutService } from '../../services/layout.service';
-
-declare var $: any;
 
 @Component({
   selector: 'app-side-panel',
   templateUrl: './side-panel.component.html',
   styleUrls: ['./side-panel.component.scss']
 })
-export class SidePanelComponent implements OnInit {
+export class SidePanelComponent {
   activeTab = 'layers';
 
-  constructor(private mapService: MapService, private layoutService: LayoutService) { }
-
-  ngOnInit() {
-    this.mapService.searchResult.subscribe({
-      next: () => $('#side-panel-tab a[href="#search"]').tab('show')
-    });
-  }
+  constructor(private layoutService: LayoutService) { }
 
   hideSidePanel() {
     this.layoutService.hideSidePanel();
