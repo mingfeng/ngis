@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MapService } from '../../services/map.service';
+import { LayoutService } from '../../services/layout.service';
 
 
 @Component({
@@ -11,9 +12,17 @@ import { MapService } from '../../services/map.service';
 export class MapToolbarComponent implements OnInit {
   currentInteraction = '';
 
-  constructor(private mapService: MapService) { }
+  constructor(private mapService: MapService, private layoutService: LayoutService) { }
 
   ngOnInit() {
+  }
+
+  showLayersPanel() {
+    this.layoutService.showLayersPanel();
+  }
+
+  showSearchPanel() {
+    this.layoutService.showSearchPanel();
   }
 
   reset() {

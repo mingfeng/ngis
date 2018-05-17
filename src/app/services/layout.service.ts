@@ -11,6 +11,18 @@ export class LayoutService {
 
   constructor(private mapService: MapService) { }
 
+  showLayersPanel() {
+    $('#side-panel-col').show();
+    $('#side-panel-tab a[href="#layers"]').tab('show');
+    this.mapService.updateMapSize();
+  }
+
+  showSearchPanel() {
+    $('#side-panel-col').show();
+    $('#side-panel-tab a[href="#search"]').tab('show');
+    this.mapService.updateMapSize();
+  }
+
   showSidePanel() {
     $('#side-panel-col').show();
     this.mapService.updateMapSize();

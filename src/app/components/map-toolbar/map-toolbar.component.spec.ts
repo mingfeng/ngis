@@ -2,11 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MapToolbarComponent } from './map-toolbar.component';
 import { MapService } from '../../services/map.service';
+import { LayoutService } from '../../services/layout.service';
 
 describe('MapToolbarComponent', () => {
   let component: MapToolbarComponent;
   let fixture: ComponentFixture<MapToolbarComponent>;
   let mapServiceSpy: jasmine.SpyObj<MapService>;
+  let layoutServiceSpy: jasmine.SpyObj<LayoutService>;
 
   beforeEach(async(() => {
     mapServiceSpy = jasmine.createSpyObj('MapService', [
@@ -17,10 +19,16 @@ describe('MapToolbarComponent', () => {
       'exportAsPNG'
     ]);
 
+    layoutServiceSpy = jasmine.createSpyObj('LayoutService', [
+      'showLayersPanel',
+      'showSearchPanel'
+    ]);
+
     TestBed.configureTestingModule({
       declarations: [ MapToolbarComponent ],
       providers: [
-        { provide: MapService, useValue: mapServiceSpy }
+        { provide: MapService, useValue: mapServiceSpy },
+        { provide: LayoutService, useValue: layoutServiceSpy }
       ]
     })
     .compileComponents();
@@ -34,6 +42,16 @@ describe('MapToolbarComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('#showLayersPanel should call spy layout service showLayersPanel', () => {
+    component.showLayersPanel();
+    expect(layoutServiceSpy.showLayersPanel).toHaveBeenCalled();
+  });
+
+  it('#showSearchPanel should call spy layout service showSearchPanel', () => {
+    component.showSearchPanel();
+    expect(layoutServiceSpy.showSearchPanel).toHaveBeenCalled();
   });
 
   it('#reset should call spy map service resetInteraction', () => {
