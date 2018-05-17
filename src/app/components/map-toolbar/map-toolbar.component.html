@@ -1,21 +1,21 @@
 <div class="btn-toolbar" role="toolbar" aria-label="Map toolbar">
-  <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Map interactions">
-    <button type="button" class="btn btn-secondary" (click)="reset()" title="Reset">
+  <div class="btn-group mr-2" role="group" aria-label="Map interactions">
+    <button type="button" class="btn btn-outline-secondary" [class.active]="currentInteraction === ''" (click)="reset()" title="Reset">
       <i class="fas fa-hand-paper"></i>
     </button>
-    <button type="button" class="btn btn-secondary" [class.active]="currentInteraction === 'box-search'" (click)="boxSearch()" title="Box search">
+    <button type="button" class="btn btn-outline-secondary" [class.active]="currentInteraction === 'box-search'" (click)="boxSearch()" title="Box search">
       <i class="fas fa-mouse-pointer"></i>
     </button>
-    <button type="button" class="btn btn-secondary" [class.active]="currentInteraction === 'draw'" (click)="draw()" title="Draw">
+    <button type="button" class="btn btn-outline-secondary" [class.active]="currentInteraction === 'draw'" (click)="draw()" title="Draw">
       <i class="fas fa-pencil-alt"></i>
     </button>
-    <button type="button" class="btn btn-secondary" [class.active]="currentInteraction === 'modify'" (click)="modify()" title="Modify">
+    <button type="button" class="btn btn-outline-secondary" [class.active]="currentInteraction === 'modify'" (click)="modify()" title="Modify">
       <i class="fas fa-edit"></i>
     </button>
   </div>
   <div class="btn-group mr-2" role="group" aria-label="Map exports">
-    <button type="button" class="btn btn-secondary" (click)="exportAsPNG()">
-      <i class="fas fa-file-image-o"></i>
+    <button type="button" class="btn btn-outline-secondary" (click)="exportAsPNG()">
+      <i class="fas fa-image"></i>
     </button>
   </div>
 </div>

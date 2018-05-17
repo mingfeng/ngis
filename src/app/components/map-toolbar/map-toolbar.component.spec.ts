@@ -41,6 +41,10 @@ describe('MapToolbarComponent', () => {
     component.reset();
     expect(component.currentInteraction).toBe('');
 
+    fixture.detectChanges();
+    const button: HTMLElement = fixture.nativeElement.querySelector('button[title="Reset"]');
+    expect(button.getAttribute('class')).toContain('active');
+
     mapServiceSpy = TestBed.get(MapService);
     expect(mapServiceSpy.resetInteraction).toHaveBeenCalled();
   });
