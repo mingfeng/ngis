@@ -1,21 +1,21 @@
 <div class="btn-toolbar" role="toolbar" aria-label="Map toolbar">
-  <div class="btn-group mr-2" role="group" aria-label="Map interactions">
+  <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Map interactions">
     <button type="button" class="btn btn-secondary" (click)="reset()" title="Reset">
-      <i class="fa fa-hand-paper-o"></i>
+      <i class="fas fa-hand-paper"></i>
     </button>
     <button type="button" class="btn btn-secondary" [class.active]="currentInteraction === 'box-search'" (click)="boxSearch()" title="Box search">
-      <i class="fa fa-mouse-pointer"></i>
+      <i class="fas fa-mouse-pointer"></i>
     </button>
     <button type="button" class="btn btn-secondary" [class.active]="currentInteraction === 'draw'" (click)="draw()" title="Draw">
-      <i class="fa fa-plus-square-o"></i>
+      <i class="fas fa-pencil-alt"></i>
     </button>
     <button type="button" class="btn btn-secondary" [class.active]="currentInteraction === 'modify'" (click)="modify()" title="Modify">
-      <i class="fa fa-pencil-square-o"></i>
+      <i class="fas fa-edit"></i>
     </button>
   </div>
   <div class="btn-group mr-2" role="group" aria-label="Map exports">
     <button type="button" class="btn btn-secondary" (click)="exportAsPNG()">
-      <i class="fa fa-file-image-o"></i>
+      <i class="fas fa-file-image-o"></i>
     </button>
   </div>
 </div>
