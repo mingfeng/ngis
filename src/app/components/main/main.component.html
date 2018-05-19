@@ -1,13 +1,20 @@
 <div class="main">
-  <div class="row no-gutters">
-    <div id="side-panel-col" class="col-md-2" style="display: none">
+  <split
+    gutterSize=5
+    useTransition="true"
+    [direction]="horizontal"
+    (dragProgress)="onDragProgress()"
+    (dragEnd)="onDragEnd()"
+    (transitionEnd)="onTransitionEnd()"
+  >
+    <split-area [size]="sidePanelSize" order="0" [visible]="isSidePanelVisible">
       <app-side-panel></app-side-panel>
-    </div>
-    <div class="col">
+    </split-area>
+    <split-area [size]="mapAreaSize" order="1">
       <app-map></app-map>
-    </div>
-    <div id="detail-panel-col" class="col-md-2" style="display: none">
+    </split-area>
+    <split-area [size]="detailPanelSize" order="2" [visible]="isDetailPanelVisible">
       <app-country-detail></app-country-detail>
-    </div>
- </div>
+    </split-area>
+  </split>
 </div>

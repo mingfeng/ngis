@@ -4,6 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MapService } from '../../services/map.service';
 import { SidePanelComponent } from './side-panel.component';
 import { LayoutService } from '../../services/layout.service';
+import { SidePanelTab } from '../../shared/side-panel-tabs';
 
 describe('SidePanelComponent', () => {
   @Component({selector: 'app-search-panel', template: ''})
@@ -14,10 +15,12 @@ describe('SidePanelComponent', () => {
 
   let component: SidePanelComponent;
   let fixture: ComponentFixture<SidePanelComponent>;
-  const mapService = new MapService(undefined, undefined);
-  const layoutService = jasmine.createSpyObj('LayoutService', ['hideSidePanel']);
+  let mapService: MapService;
+  let layoutService: LayoutService;
 
   beforeEach(async(() => {
+    mapService = new MapService(undefined, undefined);
+    layoutService = new LayoutService(mapService);
     TestBed.configureTestingModule({
       declarations: [
         SidePanelComponent,
@@ -42,8 +45,16 @@ describe('SidePanelComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should update activeTab if layout service sidePanelActiveTab is changed', () => {
+    layoutService.sidePanelActiveTab.next(SidePanelTab.SEARCH);
+    expect(component.activeTab).toBe(SidePanelTab.SEARCH);
+    layoutService.sidePanelActiveTab.next(SidePanelTab.LAYERS);
+    expect(component.activeTab).toBe(SidePanelTab.LAYERS);
+  });
+
   it('#hideSidePanel should call spy layout service hideSidePanel', () => {
+    const hideSidePanelSpy = spyOn(layoutService, 'hideSidePanel');
     component.hideSidePanel();
-    expect(layoutService.hideSidePanel).toHaveBeenCalledTimes(1);
+    expect(hideSidePanelSpy).toHaveBeenCalled();
   });
 });

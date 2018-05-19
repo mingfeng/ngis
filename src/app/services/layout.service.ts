@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { MapService } from './map.service';
 
-declare var $: any;
+import { MapService } from './map.service';
+import { SidePanelTab } from '../shared/side-panel-tabs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LayoutService {
+  sidePanelVisibility = new BehaviorSubject<boolean>(false);
+  detailPanelVisibility = new BehaviorSubject<boolean>(false);
+  sidePanelActiveTab = new BehaviorSubject<SidePanelTab>(SidePanelTab.LAYERS);
 
   constructor(private mapService: MapService) {
     this.mapService.searchResult.subscribe({
@@ -16,29 +19,24 @@ export class LayoutService {
   }
 
   showLayersPanel() {
-    $('#side-panel-col').show();
-    $('#side-panel-tab a[href="#layers"]').tab('show');
-    this.mapService.updateMapSize();
+    this.sidePanelVisibility.next(true);
+    this.sidePanelActiveTab.next(SidePanelTab.LAYERS);
   }
 
   showSearchPanel() {
-    $('#side-panel-col').show();
-    $('#side-panel-tab a[href="#search"]').tab('show');
-    this.mapService.updateMapSize();
+    this.sidePanelVisibility.next(true);
+    this.sidePanelActiveTab.next(SidePanelTab.SEARCH);
   }
 
   hideSidePanel() {
-    $('#side-panel-col').hide();
-    this.mapService.updateMapSize();
+    this.sidePanelVisibility.next(false);
   }
 
   showDetailPanel() {
-    $('#detail-panel-col').show();
-    this.mapService.updateMapSize();
+    this.detailPanelVisibility.next(true);
   }
 
   hideDetailPanel() {
-    $('#detail-panel-col').hide();
-    this.mapService.updateMapSize();
+    this.detailPanelVisibility.next(false);
   }
 }

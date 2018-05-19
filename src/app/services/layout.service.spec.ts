@@ -7,96 +7,66 @@ import { MainComponent } from '../components/main/main.component';
 import { Subject } from 'rxjs';
 import { SearchItem } from '../shared/search-item';
 import { SidePanelComponent } from '../components/side-panel/side-panel.component';
+import { SidePanelTab } from '../shared/side-panel-tabs';
 
 describe('LayoutService', () => {
-  let component: MainComponent;
-  let fixture: ComponentFixture<MainComponent>;
+  let mapService: MapService;
+  let layoutService: LayoutService;
 
-  @Component({selector: 'app-map', template: ''})
-  class MapStubComponent {}
-
-  @Component({selector: 'app-search-panel', template: ''})
-  class SearchPanelStubComponent {}
-
-  @Component({selector: 'app-layers-panel', template: ''})
-  class LayersPanelStubComponent {}
-
-  @Component({selector: 'app-country-detail', template: ''})
-  class CountryDetailStubComponent {}
-
-  const mapServiceSpy = jasmine.createSpyObj('MapService', ['updateMapSize']);
-  mapServiceSpy.searchResult = new Subject<SearchItem[]>();
   beforeEach(async(() => {
+    mapService = new MapService(undefined, undefined);
+    layoutService = new LayoutService(mapService);
     TestBed.configureTestingModule({
-      declarations: [
-        MainComponent,
-        MapStubComponent,
-        SidePanelComponent,
-        LayersPanelStubComponent,
-        SearchPanelStubComponent,
-        CountryDetailStubComponent
-      ],
       providers: [
-        LayoutService,
-        { provide: MapService, useValue: mapServiceSpy }
+        { provide: LayoutService, useValue: layoutService },
+        { provide: MapService, useValue: mapService }
       ]
-    })
-    .compileComponents();
+    });
   }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(MainComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-    mapServiceSpy.updateMapSize.calls.reset();
-  });
 
   it('should be created', inject([LayoutService], (service: LayoutService) => {
     expect(service).toBeTruthy();
   }));
 
-  it('should show search panel if map service search result is updated', inject([LayoutService], (service: LayoutService) => {
-    mapServiceSpy.searchResult.next([]);
-    const layersTab: HTMLElement = fixture.nativeElement.querySelector('#layers-tab');
-    expect(layersTab.classList.contains('active')).toBeFalsy();
-    const searchTab: HTMLElement = fixture.nativeElement.querySelector('#search-tab');
-    expect(searchTab.classList.contains('active')).toBeTruthy();
+  it('should show side panel and activate search tab when search result updated', inject([LayoutService], (service: LayoutService) => {
+    service.sidePanelVisibility.next(false);
+    service.sidePanelActiveTab.next(SidePanelTab.LAYERS);
+    mapService.searchResult.next([]);
+    expect(service.sidePanelVisibility.getValue()).toBeTruthy();
+    expect(service.sidePanelActiveTab.getValue()).toBe(SidePanelTab.SEARCH);
   }));
 
-  it('#showLayersPanel should show layers panel', inject([LayoutService], (service: LayoutService) => {
+  it('#showLayersPanel should show side panel and activate layers tab', inject([LayoutService], (service: LayoutService) => {
+    service.sidePanelVisibility.next(false);
+    service.sidePanelActiveTab.next(SidePanelTab.SEARCH);
     service.showLayersPanel();
-    const layersTab: HTMLElement = fixture.nativeElement.querySelector('#layers-tab');
-    expect(layersTab.classList.contains('active')).toBeTruthy();
-    const searchTab: HTMLElement = fixture.nativeElement.querySelector('#search-tab');
-    expect(searchTab.classList.contains('active')).toBeFalsy();
+    expect(service.sidePanelVisibility.getValue()).toBeTruthy();
+    expect(service.sidePanelActiveTab.getValue()).toBe(SidePanelTab.LAYERS);
   }));
 
-  it('#showSearchPanel should show search panel', inject([LayoutService], (service: LayoutService) => {
+  it('#showSearchPanel should show side panel and activate search tab', inject([LayoutService], (service: LayoutService) => {
+    service.sidePanelVisibility.next(false);
+    service.sidePanelActiveTab.next(SidePanelTab.LAYERS);
     service.showSearchPanel();
-    const layersTab: HTMLElement = fixture.nativeElement.querySelector('#layers-tab');
-    expect(layersTab.classList.contains('active')).toBeFalsy();
-    const searchTab: HTMLElement = fixture.nativeElement.querySelector('#search-tab');
-    expect(searchTab.classList.contains('active')).toBeTruthy();
+    expect(service.sidePanelVisibility.getValue()).toBeTruthy();
+    expect(service.sidePanelActiveTab.getValue()).toBe(SidePanelTab.SEARCH);
   }));
 
-  it('#hideSidePanel should hide side panel (style display is "none")', inject([LayoutService], (service: LayoutService) => {
+  it('#hideSearchPanel should hide side panel', inject([LayoutService], (service: LayoutService) => {
+    service.sidePanelVisibility.next(true);
     service.hideSidePanel();
-    const sidePanelColumn: HTMLElement = fixture.nativeElement.querySelector('#side-panel-col');
-    expect(sidePanelColumn.style.display).toBe('none');
-    expect(mapServiceSpy.updateMapSize).toHaveBeenCalledTimes(1);
+    expect(service.sidePanelVisibility.getValue()).toBeFalsy();
   }));
 
-  it('#showDetailPanel should display detail panel (style display is empty', inject([LayoutService], (service: LayoutService) => {
+  it('#showDetailPanel should show detail panel', inject([LayoutService], (service: LayoutService) => {
+    service.detailPanelVisibility.next(false);
     service.showDetailPanel();
-    const detailPanelColumn: HTMLElement = fixture.nativeElement.querySelector('#detail-panel-col');
-    expect(detailPanelColumn.style.display).toBe('');
-    expect(mapServiceSpy.updateMapSize).toHaveBeenCalledTimes(1);
+    expect(service.detailPanelVisibility.getValue()).toBeTruthy();
   }));
 
-  it('#hideDetailPanel should hide detail panel (style display is "none")', inject([LayoutService], (service: LayoutService) => {
+  it('#hideDetailPanel should hide detail panel', inject([LayoutService], (service: LayoutService) => {
+    service.detailPanelVisibility.next(true);
     service.hideDetailPanel();
-    const detailPanelColumn: HTMLElement = fixture.nativeElement.querySelector('#detail-panel-col');
-    expect(detailPanelColumn.style.display).toBe('none');
-    expect(mapServiceSpy.updateMapSize).toHaveBeenCalledTimes(1);
+    expect(service.detailPanelVisibility.getValue()).toBeFalsy();
   }));
 });
