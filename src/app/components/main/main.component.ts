@@ -4,7 +4,7 @@ import { MapService } from '../../services/map.service';
 import { LayoutService } from '../../services/layout.service';
 
 const FULL_SIZE = 100;
-const DEFAULT_SIDE_PANEL_SIZE = 20;
+const DEFAULT_SIDE_PANEL_SIZE = 15;
 const DEFAULT_DETAIL_PANEL_SIZE = 20;
 
 @Component({
