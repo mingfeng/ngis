@@ -1,8 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SearchPanelComponent } from './search-panel.component';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { MapService } from '../../services/map.service';
-import { SearchItem } from '../../shared/interfaces';
+import { SearchPanelComponent } from './search-panel.component';
 
 describe('SearchPanelComponent', () => {
   let component: SearchPanelComponent;

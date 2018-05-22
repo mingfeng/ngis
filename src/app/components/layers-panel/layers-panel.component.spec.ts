@@ -6,7 +6,6 @@ import { MapService } from '../../services/map.service';
 import { LAYERS, MAP_CONFIG } from '../../shared/mocks';
 import { LayersPanelComponent } from './layers-panel.component';
 
-
 describe('LayersPanelComponent', () => {
   let component: LayersPanelComponent;
   let fixture: ComponentFixture<LayersPanelComponent>;

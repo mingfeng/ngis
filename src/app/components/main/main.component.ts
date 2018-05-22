@@ -1,7 +1,6 @@
-import { Component, AfterViewInit  } from '@angular/core';
-
-import { MapService } from '../../services/map.service';
+import { AfterViewInit, Component } from '@angular/core';
 import { LayoutService } from '../../services/layout.service';
+import { MapService } from '../../services/map.service';
 
 const FULL_SIZE = 100;
 const DEFAULT_SIDE_PANEL_SIZE = 15;

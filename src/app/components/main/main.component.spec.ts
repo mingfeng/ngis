@@ -1,10 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
-
-import { MainComponent } from './main.component';
-import { MapService } from '../../services/map.service';
-import { LayoutService } from '../../services/layout.service';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { AngularSplitModule } from 'angular-split';
+import { LayoutService } from '../../services/layout.service';
+import { MapService } from '../../services/map.service';
+import { MainComponent } from './main.component';
 
 describe('MainComponent', () => {
 

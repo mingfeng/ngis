@@ -1,5 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
-
+import { AfterViewInit, Component } from '@angular/core';
 import { LayoutService } from '../../services/layout.service';
 import { SidePanelTab } from '../../shared/enums';
 

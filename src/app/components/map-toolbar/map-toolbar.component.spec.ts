@@ -1,8 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { MapToolbarComponent } from './map-toolbar.component';
-import { MapService } from '../../services/map.service';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { LayoutService } from '../../services/layout.service';
+import { MapService } from '../../services/map.service';
+import { MapToolbarComponent } from './map-toolbar.component';
 
 describe('MapToolbarComponent', () => {
   let component: MapToolbarComponent;

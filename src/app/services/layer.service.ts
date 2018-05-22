@@ -3,7 +3,6 @@ import { Observable, of } from 'rxjs';
 import { Layer } from '../shared/interfaces';
 import { LAYERS } from '../shared/mocks';
 
-
 @Injectable({
   providedIn: 'root'
 })

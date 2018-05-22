@@ -7,7 +7,6 @@ import { LayerService } from './layer.service';
 import { MapConfigService } from './map-config.service';
 import OlLayerFactory from './ollayer-factory';
 
-
 @Injectable({
   providedIn: 'root'
 })

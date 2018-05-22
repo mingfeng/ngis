@@ -3,7 +3,6 @@ import { SidePanelTab } from '../shared/enums';
 import { LayoutService } from './layout.service';
 import { MapService } from './map.service';
 
-
 describe('LayoutService', () => {
   let mapService: MapService;
   let layoutService: LayoutService;

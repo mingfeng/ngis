@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-
-import { MapService } from './map.service';
 import { SidePanelTab } from '../shared/enums';
+import { MapService } from './map.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,11 +1,9 @@
-import { async, fakeAsync, TestBed, tick, inject, ComponentFixture } from '@angular/core/testing';
 import { Component } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, inject, tick } from '@angular/core/testing';
 import * as FileSaver from 'file-saver';
-
-import { MapService } from './map.service';
 import { LayerService } from './layer.service';
 import { MapConfigService } from './map-config.service';
-import { calcBindingFlags } from '@angular/core/src/view/util';
+import { MapService } from './map.service';
 
 describe('MapService', () => {
   @Component({selector: 'app-map', template: '<div id="testmap">'})

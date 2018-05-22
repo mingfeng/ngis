@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-
 import { MapConfig } from '../shared/interfaces';
 import { MAP_CONFIG } from '../shared/mocks';
 

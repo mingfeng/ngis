@@ -4,7 +4,6 @@ import { MapConfigService } from '../../services/map-config.service';
 import { MapService } from '../../services/map.service';
 import { Layer } from '../../shared/interfaces';
 
-
 @Component({
   selector: 'app-layers-panel',
   templateUrl: './layers-panel.component.html',
