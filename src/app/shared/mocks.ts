@@ -1,5 +1,5 @@
-import { Layer, LayerType } from './layer';
-import { MapConfig } from './map-config';
+import { LayerType } from './enums';
+import { Layer, MapConfig } from './interfaces';
 
 export const LAYERS: Layer[] = [{
   type: LayerType.TILE,

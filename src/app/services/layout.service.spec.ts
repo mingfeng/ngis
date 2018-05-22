@@ -1,13 +1,8 @@
-import { Component } from '@angular/core';
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-
+import { TestBed, async, inject } from '@angular/core/testing';
+import { SidePanelTab } from '../shared/enums';
 import { LayoutService } from './layout.service';
 import { MapService } from './map.service';
-import { MainComponent } from '../components/main/main.component';
-import { Subject } from 'rxjs';
-import { SearchItem } from '../shared/search-item';
-import { SidePanelComponent } from '../components/side-panel/side-panel.component';
-import { SidePanelTab } from '../shared/side-panel-tabs';
+
 
 describe('LayoutService', () => {
   let mapService: MapService;

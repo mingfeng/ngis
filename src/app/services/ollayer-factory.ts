@@ -1,6 +1,7 @@
 import * as ol from 'openlayers';
 
-import { Layer, LayerType } from '../shared/layer';
+import { Layer } from '../shared/interfaces';
+import { LayerType } from '../shared/enums';
 
 export default class OlLayerFactory {
   static getOlLayer(layer: Layer): ol.layer.Base {

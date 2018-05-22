@@ -1,7 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 
 import { LayoutService } from '../../services/layout.service';
-import { SidePanelTab } from '../../shared/side-panel-tabs';
+import { SidePanelTab } from '../../shared/enums';
 
 @Component({
   selector: 'app-side-panel',

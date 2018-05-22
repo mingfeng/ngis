@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import { forkJoin, Subject } from 'rxjs';
-import * as ol from 'openlayers';
 import { saveAs } from 'file-saver';
-
-import { Layer, LayerType } from '../shared/layer';
-import { MapConfig } from '../shared/map-config';
-import { SearchItem } from '../shared/search-item';
+import * as ol from 'openlayers';
+import { Subject, forkJoin } from 'rxjs';
+import { Layer, MapConfig, SearchItem } from '../shared/interfaces';
 import { LayerService } from './layer.service';
 import { MapConfigService } from './map-config.service';
 import OlLayerFactory from './ollayer-factory';
+
 
 @Injectable({
   providedIn: 'root'

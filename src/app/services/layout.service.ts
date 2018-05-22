@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { MapService } from './map.service';
-import { SidePanelTab } from '../shared/side-panel-tabs';
+import { SidePanelTab } from '../shared/enums';
 
 @Injectable({
   providedIn: 'root'

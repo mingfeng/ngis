@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MapService } from '../../services/map.service';
 import { SidePanelComponent } from './side-panel.component';
 import { LayoutService } from '../../services/layout.service';
-import { SidePanelTab } from '../../shared/side-panel-tabs';
+import { SidePanelTab } from '../../shared/enums';
 
 describe('SidePanelComponent', () => {
   @Component({selector: 'app-search-panel', template: ''})

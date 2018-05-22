@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MapService } from '../../services/map.service';
-import { SearchItem } from '../../shared/search-item';
+import { SearchItem } from '../../shared/interfaces';
 
 @Component({
   selector: 'app-search-panel',

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-
-import { Layer, LayerType } from '../shared/layer';
+import { Layer } from '../shared/interfaces';
 import { LAYERS } from '../shared/mocks';
+
 
 @Injectable({
   providedIn: 'root'
