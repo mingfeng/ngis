@@ -11,12 +11,16 @@ describe('AppComponent', () => {
   @Component({selector: 'app-main', template: ''})
   class MainStubComponent {}
 
+  @Component({selector: 'app-import-dialog', template: ''})
+  class ImportDialogStubComponent {}
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
         HeaderStubComponent,
-        MainStubComponent
+        MainStubComponent,
+        ImportDialogStubComponent
       ]
     }).compileComponents();
   }));

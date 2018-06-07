@@ -1,5 +1,5 @@
-import { LayerType } from './enums';
-import { Layer, MapConfig } from './interfaces';
+import { LayerType, VectorFormatType } from './enums';
+import { Layer, MapConfig, VectorFormat } from './interfaces';
 
 export const LAYERS: Layer[] = [{
   type: LayerType.TILE,
@@ -27,3 +27,11 @@ export const MAP_CONFIG: MapConfig = {
   center: [24.9384, 60.1699],
   zoom: 12
 };
+
+export const VECTOR_FORMATS: VectorFormat[] = [{
+  type: VectorFormatType.GEOJSON,
+  name: 'GeoJSON'
+}, {
+  type: VectorFormatType.WKT,
+  name: 'WKT'
+}];

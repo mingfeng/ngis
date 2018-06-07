@@ -7,3 +7,8 @@ export enum SidePanelTab {
   LAYERS = 'layers',
   SEARCH = 'search'
 }
+
+export enum VectorFormatType {
+  WKT = 'wkt',
+  GEOJSON = 'geojson'
+}

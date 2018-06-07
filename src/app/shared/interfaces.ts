@@ -1,4 +1,4 @@
-import { LayerType } from './enums';
+import { LayerType, VectorFormatType } from './enums';
 
 export interface Country {
   id: string;
@@ -28,3 +28,7 @@ export interface SearchItem {
   name: string;
 }
 
+export interface VectorFormat {
+  type: VectorFormatType;
+  name: string;
+}

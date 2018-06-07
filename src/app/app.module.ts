@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularSplitModule } from 'angular-split';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MapComponent } from './components/map/map.component';
@@ -14,6 +15,7 @@ import { CountryDetailComponent } from './components/country-detail/country-deta
 import { MapService } from './services/map.service';
 import { LayerService } from './services/layer.service';
 import { MapConfigService } from './services/map-config.service';
+import { ImportDialogComponent } from './components/import-dialog/import-dialog.component';
 
 
 @NgModule({
@@ -26,11 +28,13 @@ import { MapConfigService } from './services/map-config.service';
     SidePanelComponent,
     LayersPanelComponent,
     MapToolbarComponent,
-    CountryDetailComponent
+    CountryDetailComponent,
+    ImportDialogComponent
   ],
   imports: [
     BrowserModule,
-    AngularSplitModule
+    AngularSplitModule,
+    ReactiveFormsModule
   ],
   providers: [MapService, LayerService, MapConfigService],
   bootstrap: [AppComponent]

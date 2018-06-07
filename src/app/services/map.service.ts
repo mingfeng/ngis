@@ -6,6 +6,7 @@ import { Layer, MapConfig, SearchItem } from '../shared/interfaces';
 import { LayerService } from './layer.service';
 import { MapConfigService } from './map-config.service';
 import OlLayerFactory from './ollayer-factory';
+import { VectorFormatType } from '../shared/enums';
 
 @Injectable({
   providedIn: 'root'
@@ -143,6 +144,35 @@ export class MapService {
       });
     });
     this.map.renderSync();
+  }
+
+  importVectorFeatures(importConfig) {
+    const { layer, format, projection, contents } = importConfig;
+    if (format === VectorFormatType.WKT) {
+      this.addWKTFeature(contents, projection);
+    } else if (format === VectorFormatType.GEOJSON) {
+      this.addGeoJsonFeature(contents, projection);
+    }
+  }
+
+  addWKTFeature(wkt: string, projection?: string) {
+    const format = new ol.format.WKT();
+    const feature = format.readFeature(wkt, {
+      dataProjection: projection || this.map.getView().getProjection(),
+      featureProjection: this.map.getView().getProjection()
+    });
+    const layer = this.getDrawLayer();
+    layer.getSource().addFeature(feature);
+  }
+
+  addGeoJsonFeature(geojson: string, projection?: string) {
+    const format = new ol.format.GeoJSON();
+    const feature = format.readFeature(geojson, {
+      dataProjection: projection || this.map.getView().getProjection(),
+      featureProjection: this.map.getView().getProjection()
+    });
+    const layer = this.getDrawLayer();
+    layer.getSource().addFeature(feature);
   }
 
   selectSearchItem(searchItem: SearchItem) {

@@ -43,6 +43,10 @@ export class MapToolbarComponent implements OnInit {
     this.mapService.activateModify();
   }
 
+  import() {
+
+  }
+
   exportAsPNG() {
     this.mapService.exportAsPNG();
   }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Layer } from '../shared/interfaces';
-import { LAYERS } from '../shared/mocks';
+import { Layer, VectorFormat } from '../shared/interfaces';
+import { LAYERS, VECTOR_FORMATS } from '../shared/mocks';
+import { LayerType } from '../shared/enums';
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +13,13 @@ export class LayerService {
 
   getLayers(): Observable<Layer[]> {
     return of(LAYERS);
+  }
+
+  getVectorLayers(): Observable<Layer[]> {
+    return of(LAYERS.filter(layer => layer.type === LayerType.VECTOR));
+  }
+
+  getVectorFormats(): Observable<VectorFormat[]> {
+    return of(VECTOR_FORMATS);
   }
 }
